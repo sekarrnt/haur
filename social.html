@@ -3,140 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Social Media</title>
+    <title>My Social Media - Toko Haur 🌿</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
 
-    <!-- Font Awesome (BIAR ICON MUNCUL) -->
+    <!-- Font Awesome Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
 
-    <!-- STYLE TAMBAHAN HAUR 🌿 -->
-    <style>
-      body {
-        font-family: "Roboto", sans-serif;
-        background: linear-gradient(to bottom, #ecfdf5, #d1fae5);
-      }
-
-      /* NAVBAR */
-      .navbar {
-        background: linear-gradient(90deg, #14532d, #166534);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .navbar-brand {
-        font-weight: bold;
-        color: white !important;
-      }
-
-      .nav-link {
-        color: white !important;
-      }
-
-      .nav-link:hover {
-        color: #bbf7d0 !important;
-      }
-
-      /* JUDUL */
-      h1 {
-        color: #14532d;
-        font-weight: bold;
-      }
-
-      /* PROFILE IMAGE */
-      .profile-img {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 4px solid #16a34a;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      }
-
-      /* CARD */
-      .card {
-        border-radius: 20px;
-        border: none;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-        transition: 0.3s;
-      }
-
-      .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-      }
-
-      .card-title {
-        color: #14532d;
-        font-weight: 600;
-      }
-
-      .card-text {
-        color: #4b5563;
-      }
-
-      /* BUTTON */
-      .btn {
-        border-radius: 50px;
-        padding: 8px 20px;
-      }
-
-      .btn-primary {
-        background: #16a34a;
-        border: none;
-      }
-
-      .btn-primary:hover {
-        background: #15803d;
-      }
-
-      .btn-danger {
-        border: none;
-      }
-
-      .btn-info {
-        border: none;
-        color: white;
-      }
-
-      .btn-dark {
-        border: none;
-      }
-    </style>
+    <!-- CUSTOM STYLE PREMIUM -->
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
 
   <body>
     <!-- Header Start -->
-    <nav class="navbar fw-semibold">
-      <div class="container-fluid"></div>
-      <div class="container-fluid">
-        <a class="navbar-brand fs-3" href="#">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
           <img
             src="assets/img/image.png"
-            alt="Logo"
-            width="30"
-            height="24"
+            alt="Logo Haur"
+            width="35"
+            height="28"
             class="d-inline-block align-text-top"
           />
-          HAUR 🌿
+          <span>Toko Haur 🌿</span>
         </a>
 
         <button
-          class="navbar-toggler"
+          class="navbar-toggler border-0"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -145,25 +54,27 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li class="nav-item">
               <a class="nav-link" href="index.html">Halaman Produk</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="shop.html">Keranjang Belanja</a>
             </li>
-
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+              <a class="nav-link dropdown-toggle active fw-bold" href="#" data-bs-toggle="dropdown">
                 Others
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu border-0 shadow-lg mt-2">
                 <li>
-                  <a class="dropdown-item" href="social.html">Social Media</a>
+                  <a class="dropdown-item active bg-success" href="social.html"><i class="fab fa-instagram me-2 text-white"></i>Social Media</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="contact.html"><i class="fas fa-envelope me-2 text-success"></i>Contact Me</a>
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
-                  <a class="dropdown-item" href="contact.html">Contact Me</a>
+                  <a class="dropdown-item fw-bold text-success" href="admin.html"><i class="fas fa-user-shield me-2 text-success"></i>Admin Dashboard</a>
                 </li>
               </ul>
             </li>
@@ -174,111 +85,92 @@
     <!-- Header End -->
 
     <!-- Main Start -->
-    <main class="px-3 py-4 mt-2">
-      <section>
-        <h1 class="text-center mb-4">Follow HAUR 🌿</h1>
-        <div class="container">
-          <div class="row">
+    <main class="container py-5 animated-fade-in-up">
+      <h1 class="text-center fw-800 text-secondary mb-3">Ikuti Toko Haur 🌿</h1>
+      <p class="text-center text-muted max-width-600 mx-auto mb-5">Temukan keseruan aktivitas gowes sepeda bambu, proses pembuatan kerajinan tangan, dan update promosi menarik melalui jejaring sosial resmi kami.</p>
 
-            <!-- SEMUA CARD TIDAK DIUBAH STRUKTURNYA -->
-            <!-- hanya tampilan yang berubah -->
-
-            <!-- Facebook -->
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-              <div class="card">
-                <div class="card-body text-center">
-                  <img src="assets/img/profile.jpg" class="profile-img mb-3" />
-                  <i class="fab fa-facebook fa-3x text-primary mb-3"></i>
-                  <h5 class="card-title">Facebook</h5>
-                  <p class="card-text">Follow me on Facebook to stay connected!</p>
-                  <a href="https://facebook.com" target="_blank" class="btn btn-primary">
-                    Visit Facebook
-                  </a>
-                </div>
+      <div class="row justify-content-center">
+        <!-- Facebook -->
+        <div class="col-sm-12 col-md-6 col-lg-3 mb-4">
+          <div class="product-card text-center p-4">
+            <div class="d-flex justify-content-center mb-3">
+              <div class="profile-img-container" style="position: relative;">
+                <img src="assets/img/profile.jpg" class="rounded-circle border border-3 border-success shadow" style="width: 90px; height: 90px; object-fit: cover;" onerror="this.src='assets/img/image.png';" />
+                <span class="position-absolute bottom-0 end-0 bg-primary text-white rounded-circle d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; border: 2px solid white;"><i class="fab fa-facebook-f"></i></span>
               </div>
             </div>
-
-            <!-- Instagram -->
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-              <div class="card">
-                <div class="card-body text-center">
-                  <img src="assets/img/profile.jpg" class="profile-img mb-3" />
-                  <i class="fab fa-instagram fa-3x text-danger mb-3"></i>
-                  <h5 class="card-title">Instagram</h5>
-                  <p class="card-text">Follow my photos and stories on Instagram!</p>
-                  <a href="https://instagram.com" target="_blank" class="btn btn-danger">
-                    Visit Instagram
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Twitter -->
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-              <div class="card">
-                <div class="card-body text-center">
-                  <img src="assets/img/profile.jpg" class="profile-img mb-3" />
-                  <i class="fab fa-twitter fa-3x text-info mb-3"></i>
-                  <h5 class="card-title">Twitter</h5>
-                  <p class="card-text">Stay updated with my tweets on Twitter!</p>
-                  <a href="https://twitter.com" target="_blank" class="btn btn-info">
-                    Visit Twitter
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- LinkedIn -->
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-              <div class="card">
-                <div class="card-body text-center">
-                  <img src="assets/img/profile.jpg" class="profile-img mb-3" />
-                  <i class="fab fa-linkedin fa-3x text-primary mb-3"></i>
-                  <h5 class="card-title">LinkedIn</h5>
-                  <p class="card-text">Connect with me professionally on LinkedIn.</p>
-                  <a href="https://linkedin.com" target="_blank" class="btn btn-primary">
-                    Visit LinkedIn
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- YouTube -->
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-              <div class="card">
-                <div class="card-body text-center">
-                  <img src="assets/img/profile.jpg" class="profile-img mb-3" />
-                  <i class="fab fa-youtube fa-3x text-danger mb-3"></i>
-                  <h5 class="card-title">YouTube</h5>
-                  <p class="card-text">Watch my latest videos on YouTube!</p>
-                  <a href="https://youtube.com" target="_blank" class="btn btn-danger">
-                    Visit YouTube
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- GitHub -->
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-              <div class="card">
-                <div class="card-body text-center">
-                  <img src="assets/img/profile.jpg" class="profile-img mb-3" />
-                  <i class="fab fa-github fa-3x text-dark mb-3"></i>
-                  <h5 class="card-title">GitHub</h5>
-                  <p class="card-text">Explore my repositories and projects on GitHub!</p>
-                  <a href="https://github.com/ZetSphere" target="_blank" class="btn btn-dark">
-                    Visit GitHub
-                  </a>
-                </div>
-              </div>
-            </div>
-
+            <h5 class="fw-bold text-secondary mb-2">Facebook Page</h5>
+            <p class="small text-muted mb-4">Dapatkan info terupdate dan jalin hubungan pertemanan dengan komunitas kami.</p>
+            <a href="https://facebook.com" target="_blank" class="btn btn-premium btn-premium-primary w-100 py-2">
+              <i class="fab fa-facebook me-1"></i> Visit Facebook
+            </a>
           </div>
         </div>
-      </section>
-    </main>
 
-    <!-- Bootstrap -->
+        <!-- Instagram -->
+        <div class="col-sm-12 col-md-6 col-lg-3 mb-4">
+          <div class="product-card text-center p-4">
+            <div class="d-flex justify-content-center mb-3">
+              <div class="profile-img-container" style="position: relative;">
+                <img src="assets/img/profile.jpg" class="rounded-circle border border-3 border-success shadow" style="width: 90px; height: 90px; object-fit: cover;" onerror="this.src='assets/img/image.png';" />
+                <span class="position-absolute bottom-0 end-0 bg-danger text-white rounded-circle d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; border: 2px solid white;"><i class="fab fa-instagram"></i></span>
+              </div>
+            </div>
+            <h5 class="fw-bold text-secondary mb-2">Instagram Feed</h5>
+            <p class="small text-muted mb-4">Koleksi foto estetik sepeda bambu Haur dan aktivitas gowes seru setiap minggunya.</p>
+            <a href="https://www.instagram.com/sepedabambuhaur?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="btn btn-premium btn-premium-primary w-100 py-2 bg-gradient" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border: none;">
+              <i class="fab fa-instagram me-1"></i> Visit Instagram
+            </a>
+          </div>
+        </div>
+
+        <!-- Twitter / X -->
+        <div class="col-sm-12 col-md-6 col-lg-3 mb-4">
+          <div class="product-card text-center p-4">
+            <div class="d-flex justify-content-center mb-3">
+              <div class="profile-img-container" style="position: relative;">
+                <img src="assets/img/profile.jpg" class="rounded-circle border border-3 border-success shadow" style="width: 90px; height: 90px; object-fit: cover;" onerror="this.src='assets/img/image.png';" />
+                <span class="position-absolute bottom-0 end-0 bg-dark text-white rounded-circle d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; border: 2px solid white;"><i class="fab fa-twitter"></i></span>
+              </div>
+            </div>
+            <h5 class="fw-bold text-secondary mb-2">Twitter / X</h5>
+            <p class="small text-muted mb-4">Ikuti cuitan harian mengenai gaya hidup ramah lingkungan bersama sepeda bambu.</p>
+            <a href="https://twitter.com" target="_blank" class="btn btn-premium btn-premium-secondary w-100 py-2">
+              <i class="fab fa-twitter me-1"></i> Visit Twitter
+            </a>
+          </div>
+        </div>
+
+        <!-- YouTube -->
+        <div class="col-sm-12 col-md-6 col-lg-3 mb-4">
+          <div class="product-card text-center p-4">
+            <div class="d-flex justify-content-center mb-3">
+              <div class="profile-img-container" style="position: relative;">
+                <img src="assets/img/profile.jpg" class="rounded-circle border border-3 border-success shadow" style="width: 90px; height: 90px; object-fit: cover;" onerror="this.src='assets/img/image.png';" />
+                <span class="position-absolute bottom-0 end-0 bg-danger text-white rounded-circle d-flex justify-content-center align-items-center" style="width: 30px; height: 30px; border: 2px solid white;"><i class="fab fa-youtube"></i></span>
+              </div>
+            </div>
+            <h5 class="fw-bold text-secondary mb-2">YouTube Channel</h5>
+            <p class="small text-muted mb-4">Review mendalam, cara merakit sepeda bambu, dan dokumentasi pembuatan kerajinan.</p>
+            <a href="http://www.youtube.com/@sangBEGAWANBAMBU" target="_blank" class="btn btn-premium btn-premium-primary w-100 py-2 bg-danger" style="border: none;">
+              <i class="fab fa-youtube me-1"></i> Visit YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Main End -->
+
+    <!-- Footer Start -->
+    <footer class="bg-dark text-white py-4 mt-5">
+      <div class="container text-center">
+        <p class="mb-1">&copy; 2026 Toko Haur 🌿. All Rights Reserved.</p>
+        <p class="small text-muted mb-0">Crafted with care, powered by Bamboo. <a href="admin.html" class="text-success text-decoration-none">Admin Panel Login</a></p>
+      </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

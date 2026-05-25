@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel Toko Haur 🌿</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- CUSTOM STYLE PREMIUM -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+
+  <body>
+    <!-- HEADER NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img
+            src="assets/img/image.png"
+            alt="Logo Haur"
+            width="35"
+            height="28"
+            class="d-inline-block align-text-top"
+          />
+          <span>Toko Haur 🌿 <span class="badge bg-success border border-light-subtle fs-8">Admin</span></span>
+        </a>
+        <div class="ms-auto" id="logout-btn-container" style="display: none;">
+          <button class="btn btn-outline-light rounded-pill px-4" id="logout-btn">
+            <i class="fas fa-sign-out-alt me-1"></i> Logout
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 1. LOGIN AREA -->
+    <div id="login-section" class="container">
+      <div class="login-container">
+        <div class="login-card animated-fade-in-up">
+          <div class="text-center mb-4">
+            <img src="assets/img/image.png" alt="Logo" width="60" class="mb-2" />
+            <h3 class="fw-800 text-secondary">Admin Login</h3>
+            <p class="text-muted small">Kelola produk, jadwal, dan pesanan Toko Haur</p>
+          </div>
+          <form id="login-form">
+            <div class="mb-3">
+              <label for="username" class="form-label fw-semibold">Username</label>
+              <input type="text" class="form-control rounded-3" id="username" placeholder="Masukkan username..." required />
+            </div>
+            <div class="mb-4">
+              <label for="password" class="form-label fw-semibold">Password</label>
+              <input type="password" class="form-control rounded-3" id="password" placeholder="Masukkan password..." required />
+            </div>
+            <button type="submit" class="btn btn-premium btn-premium-primary w-100 py-3 rounded-pill">
+              <i class="fas fa-sign-in-alt me-1"></i> Masuk
+            </button>
+          </form>
+          <div class="text-center mt-3">
+            <a href="index.html" class="text-success text-decoration-none small"><i class="fas fa-arrow-left me-1"></i> Kembali ke Halaman Utama</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. DASHBOARD AREA -->
+    <div id="dashboard-section" class="container py-5" style="display: none;">
+      <!-- Welcome Header -->
+      <div class="admin-header animated-fade-in-up">
+        <div>
+          <h2 class="fw-800 mb-1">Selamat Datang di Admin Panel 🌿</h2>
+          <p class="mb-0 text-white-50">Kelola operasional dan katalog e-commerce Toko Haur dengan mudah.</p>
+        </div>
+        <div>
+          <a href="index.html" class="btn btn-light rounded-pill px-4 fw-semibold text-success shadow-sm" target="_blank">
+            <i class="fas fa-external-link-alt me-1"></i> Lihat Toko Utama
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <ul class="nav admin-nav-tabs mb-4 animated-fade-in-up" id="adminTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="tab-overview" data-tab="overview">
+            <i class="fas fa-chart-line me-1"></i> Ringkasan
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-products" data-tab="products">
+            <i class="fas fa-boxes me-1"></i> Kelola Produk
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-schedules" data-tab="schedules">
+            <i class="fas fa-calendar-alt me-1"></i> Kelola Jadwal & Status
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link position-relative" id="tab-orders" data-tab="orders">
+            <i class="fas fa-shopping-bag me-1"></i> Kelola Pesanan
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-white" id="orders-badge" style="display: none; font-size: 0.65rem; padding: 3px 6px;">0</span>
+          </button>
+        </li>
+      </ul>
+
+      <!-- Tab Content Area -->
+      <div class="tab-content" id="adminTabContent">
+        
+        <!-- A. TAB OVERVIEW -->
+        <div class="tab-pane fade show active" id="pane-overview" role="tabpanel">
+          <!-- Stat Cards -->
+          <div class="row g-4 mb-5 animated-fade-in-up">
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-box"></i></div>
+                <div class="stat-info">
+                  <h3 id="stat-total-products">0</h3>
+                  <p>Total Produk</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon text-danger" style="background: rgba(220, 38, 38, 0.1);"><i class="fas fa-shopping-basket"></i></div>
+                <div class="stat-info">
+                  <h3 id="stat-total-orders">0</h3>
+                  <p>Pesanan Masuk</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon text-warning" style="background: rgba(245, 158, 11, 0.1);"><i class="fas fa-calendar-check"></i></div>
+                <div class="stat-info">
+                  <h3 id="stat-total-schedules">0</h3>
+                  <p>Workshop/Event</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon text-info" style="background: rgba(6, 182, 212, 0.1);"><i class="fas fa-store-alt"></i></div>
+                <div class="stat-info">
+                  <h3 id="stat-shop-status">Aktif</h3>
+                  <p>Status Toko</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions & Quick View -->
+          <div class="row">
+            <!-- Recent Orders -->
+            <div class="col-lg-8 mb-4">
+              <div class="glass-container h-100">
+                <h4 class="section-title-premium"><i class="fas fa-clock text-success"></i> Pesanan Terbaru</h4>
+                <div class="table-responsive mt-3">
+                  <table class="table align-middle">
+                    <thead>
+                      <tr>
+                        <th>ID Pesanan</th>
+                        <th>Pelanggan</th>
+                        <th>Tanggal</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="overview-recent-orders">
+                      <!-- Dinamis -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- Quick Setting -->
+            <div class="col-lg-4 mb-4">
+              <div class="glass-container h-100">
+                <h4 class="section-title-premium"><i class="fas fa-sliders-h text-success"></i> Pengaturan Cepat</h4>
+                <div class="mt-3">
+                  <p class="small text-muted">Status Operasional Toko saat ini:</p>
+                  <div class="d-flex align-items-center gap-3 mb-4">
+                    <span id="quick-status-badge" class="badge bg-success fs-6 px-3 py-2 rounded-pill">Toko Buka</span>
+                    <button class="btn btn-outline-success btn-sm rounded-pill px-3" id="toggle-shop-status-btn">Ubah Status</button>
+                  </div>
+                  <hr />
+                  <p class="small text-muted mb-2">Pemberitahuan Sistem:</p>
+                  <div class="p-3 bg-success-subtle border border-success-subtle rounded-3 text-success small">
+                    <i class="fas fa-info-circle me-1"></i> Semua data disimpan secara lokal pada peramban (browser) ini. Harap gunakan browser yang sama untuk mengelola data Toko Haur.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- B. TAB PRODUCTS -->
+        <div class="tab-pane fade" id="pane-products" role="tabpanel">
+          <div class="glass-container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+              <h4 class="section-title-premium mb-0"><i class="fas fa-boxes text-success"></i> Katalog Produk Haur</h4>
+              <button class="btn btn-premium btn-premium-primary" id="add-product-btn">
+                <i class="fas fa-plus-circle"></i> Tambah Produk Baru
+              </button>
+            </div>
+
+            <!-- Product Table -->
+            <div class="table-responsive">
+              <table class="table table-hover align-middle" id="product-table">
+                <thead>
+                  <tr>
+                    <th>Gambar</th>
+                    <th>Nama Produk</th>
+                    <th>Harga</th>
+                    <th>Kategori</th>
+                    <th>Stok</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-product-list">
+                  <!-- Dinamis -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- C. TAB SCHEDULES -->
+        <div class="tab-pane fade" id="pane-schedules" role="tabpanel">
+          <div class="row">
+            <!-- 1. Operational Hour Panel -->
+            <div class="col-lg-4 mb-4">
+              <div class="glass-container h-100">
+                <h4 class="section-title-premium"><i class="fas fa-clock text-success"></i> Jam Operasional</h4>
+                <form id="shop-status-form" class="mt-3">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Status Toko</label>
+                    <select class="form-select rounded-3" id="shop-status-select" required>
+                      <option value="Buka">Buka (Menerima Order)</option>
+                      <option value="Tutup">Tutup (Libur/Tutup)</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="shop-hours" class="form-label fw-semibold">Jam Operasional</label>
+                    <input type="text" class="form-control rounded-3" id="shop-hours" required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="shop-notes" class="form-label fw-semibold">Catatan / Keterangan</label>
+                    <textarea class="form-control rounded-3" id="shop-notes" rows="3" required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-premium btn-premium-primary w-100 mt-2">
+                    <i class="fas fa-save me-1"></i> Simpan Jam Operasional
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <!-- 2. Workshop/Event Panel -->
+            <div class="col-lg-8 mb-4">
+              <div class="glass-container h-100">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+                  <h4 class="section-title-premium mb-0"><i class="fas fa-calendar-check text-success"></i> Jadwal Event & Workshop</h4>
+                  <button class="btn btn-premium btn-premium-primary btn-sm" id="add-schedule-btn">
+                    <i class="fas fa-plus"></i> Tambah Jadwal
+                  </button>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table align-middle">
+                    <thead>
+                      <tr>
+                        <th>Workshop / Event</th>
+                        <th>Tanggal</th>
+                        <th>Waktu</th>
+                        <th>Kuota</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-schedule-list">
+                      <!-- Dinamis -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- D. TAB ORDERS -->
+        <div class="tab-pane fade" id="pane-orders" role="tabpanel">
+          <div class="glass-container">
+            <h4 class="section-title-premium mb-4"><i class="fas fa-shopping-bag text-success"></i> Kelola Pesanan Masuk</h4>
+            
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead>
+                  <tr>
+                    <th>Invoice ID</th>
+                    <th>Pelanggan</th>
+                    <th>Detail Pengiriman</th>
+                    <th>Pesanan Item (Qty)</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-order-list">
+                  <!-- Dinamis -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- DASHBOARD AREA END -->
+
+    <!-- MODAL TAMBAH/EDIT PRODUK -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-content-glass">
+          <div class="modal-header modal-header-glass">
+            <h5 class="modal-title fw-bold" id="productModalLabel">Detail Produk</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form id="product-form">
+            <input type="hidden" id="productId" />
+            <div class="modal-body p-4">
+              <div class="mb-3">
+                <label for="productName" class="form-label fw-semibold">Nama Produk</label>
+                <input type="text" class="form-control rounded-3" id="productName" placeholder="Contoh: Sepeda Bambu Kustom..." required />
+              </div>
+              <div class="row">
+                <div class="col-6 mb-3">
+                  <label for="productPrice" class="form-label fw-semibold">Harga (Rp)</label>
+                  <input type="number" class="form-control rounded-3" id="productPrice" placeholder="Contoh: 150000..." required />
+                </div>
+                <div class="col-6 mb-3">
+                  <label for="productStock" class="form-label fw-semibold">Stok</label>
+                  <input type="number" class="form-control rounded-3" id="productStock" placeholder="Contoh: 10..." required />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="productCategory" class="form-label fw-semibold">Kategori</label>
+                <select class="form-select rounded-3" id="productCategory" required>
+                  <option value="Sepeda">Sepeda</option>
+                  <option value="Aksesoris">Aksesoris</option>
+                  <option value="Fashion">Fashion</option>
+                  <option value="Dekorasi">Dekorasi</option>
+                  <option value="Bahan Baku">Bahan Baku</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="productDesc" class="form-label fw-semibold">Deskripsi Produk</label>
+                <textarea class="form-control rounded-3" id="productDesc" rows="3" placeholder="Masukkan deskripsi produk..."></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="productImage" class="form-label fw-semibold">Foto Produk</label>
+                <input type="file" class="form-control rounded-3" id="productImage" accept="image/*" />
+                <div class="form-text text-muted">Abaikan jika menggunakan foto bawaan atau tidak ingin mengganti foto saat edit.</div>
+                <div id="image-preview-container" class="mt-2 text-center" style="display: none;">
+                  <img id="image-preview" src="" alt="Preview" class="img-thumbnail rounded-3" style="max-height: 120px;" />
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer modal-footer-glass">
+              <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-premium btn-premium-primary rounded-pill px-4">Simpan Produk</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL TAMBAH/EDIT JADWAL -->
+    <div class="modal fade" id="scheduleModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-content-glass">
+          <div class="modal-header modal-header-glass">
+            <h5 class="modal-title fw-bold" id="scheduleModalLabel">Detail Jadwal Event</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form id="schedule-form">
+            <input type="hidden" id="scheduleId" />
+            <div class="modal-body p-4">
+              <div class="mb-3">
+                <label for="scheduleTitle" class="form-label fw-semibold">Judul Event / Workshop</label>
+                <input type="text" class="form-control rounded-3" id="scheduleTitle" placeholder="Contoh: Workshop Menganyam..." required />
+              </div>
+              <div class="row">
+                <div class="col-6 mb-3">
+                  <label for="scheduleDate" class="form-label fw-semibold">Tanggal</label>
+                  <input type="date" class="form-control rounded-3" id="scheduleDate" required />
+                </div>
+                <div class="col-6 mb-3">
+                  <label for="scheduleTime" class="form-label fw-semibold">Waktu / Jam</label>
+                  <input type="text" class="form-control rounded-3" id="scheduleTime" placeholder="Contoh: 09:00 - 12:00..." required />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 mb-3">
+                  <label for="scheduleQuota" class="form-label fw-semibold">Kuota Peserta</label>
+                  <input type="text" class="form-control rounded-3" id="scheduleQuota" placeholder="Contoh: 15 Orang..." required />
+                </div>
+                <div class="col-6 mb-3">
+                  <label for="scheduleStatus" class="form-label fw-semibold">Status Event</label>
+                  <select class="form-select rounded-3" id="scheduleStatus" required>
+                    <option value="Aktif">Aktif (Tampil)</option>
+                    <option value="Selesai">Selesai (Arsip)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="scheduleLocation" class="form-label fw-semibold">Lokasi Acara</label>
+                <input type="text" class="form-control rounded-3" id="scheduleLocation" placeholder="Contoh: Giri Harja Workshop..." required />
+              </div>
+              <div class="mb-3">
+                <label for="scheduleDesc" class="form-label fw-semibold">Keterangan Tambahan</label>
+                <textarea class="form-control rounded-3" id="scheduleDesc" rows="2" placeholder="Detail ringkas materi workshop..."></textarea>
+              </div>
+            </div>
+            <div class="modal-footer modal-footer-glass">
+              <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-premium btn-premium-primary rounded-pill px-4">Simpan Jadwal</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- DATABASE LOKAL (localStorage Helpers) -->
+    <script src="assets/js/db.js"></script>
+
+    <!-- LOGIKA ADMIN PANEL -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- 1. OTENTIKASI & TAMPILAN ---
+        const loginSection = document.getElementById("login-section");
+        const dashboardSection = document.getElementById("dashboard-section");
+        const logoutBtnContainer = document.getElementById("logout-btn-container");
+        const loginForm = document.getElementById("login-form");
+        const logoutBtn = document.getElementById("logout-btn");
+
+        function checkAuth() {
+          const isLoggedIn = sessionStorage.getItem("haur_admin_logged_in") === "true";
+          if (isLoggedIn) {
+            loginSection.style.display = "none";
+            dashboardSection.style.display = "block";
+            logoutBtnContainer.style.display = "block";
+            initDashboardData();
+          } else {
+            loginSection.style.display = "block";
+            dashboardSection.style.display = "none";
+            logoutBtnContainer.style.display = "none";
+          }
+        }
+
+        loginForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const user = document.getElementById("username").value.trim();
+          const pass = document.getElementById("password").value.trim();
+
+          // Kredensial Admin Sederhana
+          if (user === "admin" && pass === "haur2026") {
+            sessionStorage.setItem("haur_admin_logged_in", "true");
+            alert("🔑 Login berhasil! Selamat datang Admin Haur.");
+            checkAuth();
+          } else {
+            alert("❌ Username atau password salah! Coba gunakan user: admin dan pass: haur2026.");
+          }
+        });
+
+        logoutBtn.addEventListener("click", () => {
+          if (confirm("Apakah Anda yakin ingin keluar dari Admin Panel?")) {
+            sessionStorage.removeItem("haur_admin_logged_in");
+            checkAuth();
+          }
+        });
+
+        // Jalankan cek otentikasi
+        checkAuth();
+
+
+        // --- 2. LOGIKA TABS SWITCHER ---
+        const tabs = document.querySelectorAll("#adminTabs .nav-link");
+        const panes = document.querySelectorAll(".tab-pane");
+
+        tabs.forEach(tab => {
+          tab.addEventListener("click", (e) => {
+            tabs.forEach(t => t.classList.remove("active"));
+            panes.forEach(p => {
+              p.classList.remove("show", "active");
+            });
+
+            const targetTab = e.currentTarget;
+            targetTab.classList.add("active");
+
+            const paneId = "pane-" + targetTab.getAttribute("data-tab");
+            const targetPane = document.getElementById(paneId);
+            if (targetPane) {
+              targetPane.classList.add("show", "active");
+            }
+          });
+        });
+
+
+        // --- 3. CRUD LOGIC & STATS ---
+        let productModal = null;
+        let scheduleModal = null;
+        if (typeof bootstrap !== "undefined") {
+          productModal = new bootstrap.Modal(document.getElementById("productModal"));
+          scheduleModal = new bootstrap.Modal(document.getElementById("scheduleModal"));
+        }
+
+        // Variabel penampung Base64 upload
+        let uploadedBase64Image = "";
+
+        // Preview File Upload
+        const fileInput = document.getElementById("productImage");
+        const imagePreviewContainer = document.getElementById("image-preview-container");
+        const imagePreview = document.getElementById("image-preview");
+
+        fileInput.addEventListener("change", (e) => {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+              uploadedBase64Image = evt.target.result;
+              imagePreview.src = uploadedBase64Image;
+              imagePreviewContainer.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+
+        function initDashboardData() {
+          renderOverview();
+          renderProductsTable();
+          renderSchedulesTable();
+          renderOrdersTable();
+          updateBadgesAndStats();
+        }
+
+        function updateBadgesAndStats() {
+          const products = getProducts();
+          const schedules = getSchedules();
+          const orders = getOrders();
+          const shopStatus = getShopStatus();
+
+          // Update Ringkasan Stat Cards
+          document.getElementById("stat-total-products").innerText = products.length;
+          document.getElementById("stat-total-orders").innerText = orders.length;
+          document.getElementById("stat-total-schedules").innerText = schedules.length;
+          
+          const statusBadge = document.getElementById("quick-status-badge");
+          document.getElementById("stat-shop-status").innerText = shopStatus.status;
+          if (shopStatus.status === "Buka") {
+            statusBadge.innerText = "Toko Buka";
+            statusBadge.className = "badge bg-success fs-6 px-3 py-2 rounded-pill";
+          } else {
+            statusBadge.innerText = "Toko Tutup";
+            statusBadge.className = "badge bg-danger fs-6 px-3 py-2 rounded-pill";
+          }
+
+          // Update Tab Order Badge
+          const pendingOrdersCount = orders.filter(o => o.status === "Pending").length;
+          const badge = document.getElementById("orders-badge");
+          if (pendingOrdersCount > 0) {
+            badge.innerText = pendingOrdersCount;
+            badge.style.display = "inline-block";
+          } else {
+            badge.style.display = "none";
+          }
+        }
+
+        // --- A. OVERVIEW LOGIC ---
+        function renderOverview() {
+          const orders = getOrders();
+          const recentOrdersContainer = document.getElementById("overview-recent-orders");
+          recentOrdersContainer.innerHTML = "";
+
+          // Ambil 5 pesanan terbaru
+          const recentOrders = [...orders].reverse().slice(0, 5);
+
+          if (recentOrders.length === 0) {
+            recentOrdersContainer.innerHTML = `
+              <tr>
+                <td colspan="5" class="text-center py-4 text-muted small">Belum ada pesanan masuk.</td>
+              </tr>
+            `;
+            return;
+          }
+
+          recentOrders.forEach(o => {
+            let badgeClass = "badge-pending";
+            if (o.status === "Diproses") badgeClass = "badge-process";
+            if (o.status === "Dikirim") badgeClass = "badge-shipping";
+            if (o.status === "Selesai") badgeClass = "badge-success";
+
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td class="fw-bold text-success">${o.id}</td>
+              <td>${o.namaPelanggan}</td>
+              <td class="small text-muted">${o.tanggal.split(" pukul ")[0]}</td>
+              <td class="fw-bold">Rp ${parseInt(o.total).toLocaleString()}</td>
+              <td><span class="badge-status ${badgeClass}">${o.status}</span></td>
+            `;
+            recentOrdersContainer.appendChild(tr);
+          });
+        }
+
+        // Toggle Quick Shop Status
+        document.getElementById("toggle-shop-status-btn").addEventListener("click", () => {
+          const shopStatus = getShopStatus();
+          const newStatus = shopStatus.status === "Buka" ? "Tutup" : "Buka";
+          shopStatus.status = newStatus;
+          shopStatus.catatan = newStatus === "Buka" ? "Kami siap melayani kebutuhan aneka bambu Anda!" : "Kami sedang libur sementara waktu. Semua pesanan akan kami respon sesegera mungkin.";
+          saveShopStatus(shopStatus);
+          alert(`Status Toko berhasil diubah menjadi: ${newStatus}!`);
+          updateBadgesAndStats();
+        });
+
+
+        // --- B. PRODUCTS CRUD LOGIC ---
+        function getProductImgHtml(gambar) {
+          if (!gambar) return `<img src="assets/img/image.png" class="rounded-3 border" style="width: 50px; height: 50px; object-fit: cover;" />`;
+          if (gambar.startsWith("data:image") || gambar.startsWith("http")) {
+            return `<img src="${gambar}" class="rounded-3 border" style="width: 50px; height: 50px; object-fit: cover;" onerror="this.src='assets/img/image.png';" />`;
+          }
+          return `<img src="assets/img/${gambar}" class="rounded-3 border" style="width: 50px; height: 50px; object-fit: cover;" onerror="this.src='assets/img/image.png';" />`;
+        }
+
+        function renderProductsTable() {
+          const products = getProducts();
+          const tableBody = document.getElementById("admin-product-list");
+          tableBody.innerHTML = "";
+
+          if (products.length === 0) {
+            tableBody.innerHTML = `
+              <tr>
+                <td colspan="6" class="text-center py-4 text-muted small">Katalog produk masih kosong. Silakan tambah produk baru!</td>
+              </tr>
+            `;
+            return;
+          }
+
+          products.forEach(p => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${getProductImgHtml(p.gambar)}</td>
+              <td class="fw-bold text-secondary">${p.nama}</td>
+              <td class="fw-extrabold text-success">Rp ${parseInt(p.harga).toLocaleString()}</td>
+              <td><span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3">${p.kategori}</span></td>
+              <td class="fw-bold">${p.stok} Pcs</td>
+              <td>
+                <div class="btn-group gap-2">
+                  <button class="btn btn-outline-success btn-sm rounded-pill edit-prod-btn" data-id="${p.id}"><i class="fas fa-edit"></i> Edit</button>
+                  <button class="btn btn-outline-danger btn-sm rounded-pill delete-prod-btn" data-id="${p.id}"><i class="fas fa-trash"></i> Hapus</button>
+                </div>
+              </td>
+            `;
+            tableBody.appendChild(tr);
+          });
+
+          // Bind Buttons
+          document.querySelectorAll(".edit-prod-btn").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+              const id = e.currentTarget.getAttribute("data-id");
+              openEditProductModal(id);
+            });
+          });
+
+          document.querySelectorAll(".delete-prod-btn").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+              const id = e.currentTarget.getAttribute("data-id");
+              handleDeleteProduct(id);
+            });
+          });
+        }
+
+        // Trigger Add Product Form
+        document.getElementById("add-product-btn").addEventListener("click", () => {
+          document.getElementById("product-form").reset();
+          document.getElementById("productId").value = "";
+          uploadedBase64Image = "";
+          imagePreviewContainer.style.display = "none";
+          document.getElementById("productModalLabel").innerText = "Tambah Produk Baru";
+          
+          if (productModal) {
+            productModal.show();
+          }
+        });
+
+        function openEditProductModal(id) {
+          const products = getProducts();
+          const p = products.find(prod => prod.id === id);
+          if (!p) return;
+
+          document.getElementById("productId").value = p.id;
+          document.getElementById("productName").value = p.nama;
+          document.getElementById("productPrice").value = p.harga;
+          document.getElementById("productStock").value = p.stok;
+          document.getElementById("productCategory").value = p.kategori;
+          document.getElementById("productDesc").value = p.deskripsi || "";
+          uploadedBase64Image = p.gambar || "";
+          
+          imagePreview.src = uploadedBase64Image.startsWith("data:") || uploadedBase64Image.startsWith("http") ? uploadedBase64Image : "assets/img/" + uploadedBase64Image;
+          imagePreviewContainer.style.display = "block";
+          document.getElementById("productModalLabel").innerText = "Edit Informasi Produk";
+
+          if (productModal) {
+            productModal.show();
+          }
+        }
+
+        // Simpan Data CRUD Produk
+        document.getElementById("product-form").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const id = document.getElementById("productId").value;
+          const nama = document.getElementById("productName").value.trim();
+          const harga = document.getElementById("productPrice").value;
+          const stok = document.getElementById("productStock").value;
+          const kategori = document.getElementById("productCategory").value;
+          const deskripsi = document.getElementById("productDesc").value.trim();
+
+          const prodData = {
+            nama,
+            harga,
+            stok,
+            kategori,
+            deskripsi,
+            gambar: uploadedBase64Image // Menggunakan Base64 jika ada
+          };
+
+          if (id) {
+            // Update
+            updateProduct(id, prodData);
+            alert(`🎉 Produk "${nama}" berhasil diperbarui!`);
+          } else {
+            // Add new
+            addProduct(prodData);
+            alert(`🎉 Produk "${nama}" berhasil ditambahkan ke katalog!`);
+          }
+
+          if (productModal) {
+            productModal.hide();
+          }
+          
+          initDashboardData();
+        });
+
+        function handleDeleteProduct(id) {
+          const products = getProducts();
+          const p = products.find(prod => prod.id === id);
+          if (!p) return;
+
+          if (confirm(`Apakah Anda yakin ingin menghapus produk "${p.nama}" dari katalog Haur?`)) {
+            deleteProduct(id);
+            alert("🗑️ Produk berhasil dihapus.");
+            initDashboardData();
+          }
+        }
+
+
+        // --- C. SCHEDULES & OPERATIONAL PANEL LOGIC ---
+        
+        // 1. Operational Hour
+        function renderOperationalForm() {
+          const op = getShopStatus();
+          document.getElementById("shop-status-select").value = op.status;
+          document.getElementById("shop-hours").value = op.jamOperasional;
+          document.getElementById("shop-notes").value = op.catatan;
+        }
+
+        document.getElementById("shop-status-form").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const status = document.getElementById("shop-status-select").value;
+          const jamOperasional = document.getElementById("shop-hours").value.trim();
+          const catatan = document.getElementById("shop-notes").value.trim();
+
+          saveShopStatus({ status, jamOperasional, catatan });
+          alert("💾 Jam operasional dan status toko berhasil disimpan!");
+          initDashboardData();
+        });
+
+        // 2. Schedule Event Table
+        function renderSchedulesTable() {
+          const schedules = getSchedules();
+          const tableBody = document.getElementById("admin-schedule-list");
+          tableBody.innerHTML = "";
+
+          if (schedules.length === 0) {
+            tableBody.innerHTML = `
+              <tr>
+                <td colspan="6" class="text-center py-4 text-muted small">Jadwal event atau workshop masih kosong.</td>
+              </tr>
+            `;
+            return;
+          }
+
+          schedules.forEach(s => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td class="fw-bold text-secondary">${s.judul}</td>
+              <td class="small">${s.tanggal}</td>
+              <td class="small">${s.waktu}</td>
+              <td class="small fw-semibold text-dark">${s.kuota}</td>
+              <td><span class="badge ${s.status === 'Aktif' ? 'bg-success' : 'bg-secondary'} rounded-pill">${s.status}</span></td>
+              <td>
+                <div class="btn-group gap-2">
+                  <button class="btn btn-outline-success btn-sm rounded-pill edit-sched-btn" data-id="${s.id}"><i class="fas fa-edit"></i> Edit</button>
+                  <button class="btn btn-outline-danger btn-sm rounded-pill delete-sched-btn" data-id="${s.id}"><i class="fas fa-trash"></i> Hapus</button>
+                </div>
+              </td>
+            `;
+            tableBody.appendChild(tr);
+          });
+
+          // Bind Buttons
+          document.querySelectorAll(".edit-sched-btn").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+              const id = e.currentTarget.getAttribute("data-id");
+              openEditScheduleModal(id);
+            });
+          });
+
+          document.querySelectorAll(".delete-sched-btn").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+              const id = e.currentTarget.getAttribute("data-id");
+              handleDeleteSchedule(id);
+            });
+          });
+        }
+
+        // Trigger Add Schedule
+        document.getElementById("add-schedule-btn").addEventListener("click", () => {
+          document.getElementById("schedule-form").reset();
+          document.getElementById("scheduleId").value = "";
+          document.getElementById("scheduleModalLabel").innerText = "Tambah Jadwal Workshop Baru";
+          
+          if (scheduleModal) {
+            scheduleModal.show();
+          }
+        });
+
+        function openEditScheduleModal(id) {
+          const schedules = getSchedules();
+          const s = schedules.find(sched => sched.id === id);
+          if (!s) return;
+
+          document.getElementById("scheduleId").value = s.id;
+          document.getElementById("scheduleTitle").value = s.judul;
+          document.getElementById("scheduleDate").value = s.tanggal;
+          document.getElementById("scheduleTime").value = s.waktu;
+          document.getElementById("scheduleQuota").value = s.kuota;
+          document.getElementById("scheduleStatus").value = s.status;
+          document.getElementById("scheduleLocation").value = s.lokasi;
+          document.getElementById("scheduleDesc").value = s.deskripsi || "";
+          
+          document.getElementById("scheduleModalLabel").innerText = "Edit Jadwal Workshop";
+
+          if (scheduleModal) {
+            scheduleModal.show();
+          }
+        }
+
+        // Simpan Data CRUD Jadwal
+        document.getElementById("schedule-form").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const id = document.getElementById("scheduleId").value;
+          const judul = document.getElementById("scheduleTitle").value.trim();
+          const tanggal = document.getElementById("scheduleDate").value;
+          const waktu = document.getElementById("scheduleTime").value.trim();
+          const kuota = document.getElementById("scheduleQuota").value.trim();
+          const status = document.getElementById("scheduleStatus").value;
+          const lokasi = document.getElementById("scheduleLocation").value.trim();
+          const deskripsi = document.getElementById("scheduleDesc").value.trim();
+
+          const schedData = { judul, tanggal, waktu, kuota, status, lokasi, deskripsi };
+
+          if (id) {
+            updateSchedule(id, schedData);
+            alert(`🎉 Jadwal "${judul}" berhasil diperbarui!`);
+          } else {
+            addSchedule(schedData);
+            alert(`🎉 Jadwal "${judul}" berhasil ditambahkan!`);
+          }
+
+          if (scheduleModal) {
+            scheduleModal.hide();
+          }
+          
+          initDashboardData();
+        });
+
+        function handleDeleteSchedule(id) {
+          const schedules = getSchedules();
+          const s = schedules.find(sched => sched.id === id);
+          if (!s) return;
+
+          if (confirm(`Apakah Anda yakin ingin menghapus jadwal workshop "${s.judul}"?`)) {
+            let allScheds = getSchedules();
+            allScheds = allScheds.filter(sc => sc.id !== id);
+            saveSchedules(allScheds);
+            alert("🗑️ Jadwal workshop berhasil dihapus.");
+            initDashboardData();
+          }
+        }
+
+
+        // --- D. ORDER MANAGEMENT LOGIC ---
+        function renderOrdersTable() {
+          const orders = getOrders();
+          const tableBody = document.getElementById("admin-order-list");
+          tableBody.innerHTML = "";
+
+          // Tampilkan urutan pesanan paling baru di atas
+          const sortedOrders = [...orders].reverse();
+
+          if (sortedOrders.length === 0) {
+            tableBody.innerHTML = `
+              <tr>
+                <td colspan="7" class="text-center py-4 text-muted small">Belum ada transaksi pesanan terdaftar.</td>
+              </tr>
+            `;
+            return;
+          }
+
+          sortedOrders.forEach(o => {
+            let badgeClass = "badge-pending";
+            if (o.status === "Diproses") badgeClass = "badge-process";
+            if (o.status === "Dikirim") badgeClass = "badge-shipping";
+            if (o.status === "Selesai") badgeClass = "badge-success";
+
+            // Format Pesanan Items
+            let itemsHtml = `<ul class="list-unstyled mb-0 px-0 small text-secondary">`;
+            o.items.forEach(it => {
+              itemsHtml += `<li>• ${it.nama} <span class="fw-bold">x${it.qty}</span></li>`;
+            });
+            itemsHtml += `</ul>`;
+
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td class="fw-bold text-success">${o.id}<br><span class="small text-muted fw-normal">${o.tanggal.split(" pukul ")[0]}</span></td>
+              <td>
+                <span class="fw-bold text-secondary">${o.namaPelanggan}</span><br>
+                <a href="https://wa.me/${o.whatsapp}" target="_blank" class="text-success small fw-semibold text-decoration-none"><i class="fab fa-whatsapp"></i> +${o.whatsapp}</a>
+              </td>
+              <td class="small text-muted" style="max-width: 200px;">
+                <span class="fw-semibold text-dark">Alamat:</span> ${o.alamat}<br>
+                <span class="fw-semibold text-dark">Kurir:</span> ${o.kurir}<br>
+                <span class="fw-semibold text-dark">Bayar:</span> ${o.metodePembayaran}
+              </td>
+              <td>${itemsHtml}</td>
+              <td class="fw-extrabold text-success">Rp ${parseInt(o.total).toLocaleString()}</td>
+              <td><span class="badge-status ${badgeClass}">${o.status}</span></td>
+              <td>
+                <div class="btn-group-vertical btn-group-sm gap-1 w-100">
+                  <select class="form-select form-select-sm rounded-3 status-change-select" data-id="${o.id}">
+                    <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                    <option value="Diproses" ${o.status === 'Diproses' ? 'selected' : ''}>Diproses</option>
+                    <option value="Dikirim" ${o.status === 'Dikirim' ? 'selected' : ''}>Dikirim</option>
+                    <option value="Selesai" ${o.status === 'Selesai' ? 'selected' : ''}>Selesai</option>
+                  </select>
+                  <button class="btn btn-outline-danger btn-sm rounded-pill delete-order-btn w-100 mt-1" data-id="${o.id}"><i class="fas fa-trash-alt"></i> Hapus</button>
+                </div>
+              </td>
+            `;
+            tableBody.appendChild(tr);
+          });
+
+          // Bind Change Status event
+          document.querySelectorAll(".status-change-select").forEach(select => {
+            select.addEventListener("change", (e) => {
+              const id = e.currentTarget.getAttribute("data-id");
+              const newStatus = e.currentTarget.value;
+              updateOrderStatus(id, newStatus);
+              alert(`🔄 Status Pesanan ${id} berhasil diperbarui menjadi: ${newStatus}!`);
+              initDashboardData();
+            });
+          });
+
+          // Bind Delete Order event
+          document.querySelectorAll(".delete-order-btn").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+              const id = e.currentTarget.getAttribute("data-id");
+              handleDeleteOrder(id);
+            });
+          });
+        }
+
+        function handleDeleteOrder(id) {
+          if (confirm(`Apakah Anda yakin ingin menghapus arsip pesanan "${id}"?`)) {
+            deleteOrder(id);
+            alert("🗑️ Arsip pesanan berhasil dihapus.");
+            initDashboardData();
+          }
+        }
+
+        // Render data forms on tab schedules load
+        renderOperationalForm();
+      });
+    </script>
+  </body>
+</html>
