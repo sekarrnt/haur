@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Pembeli - Toko Haur 🌿</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- CUSTOM STYLE PREMIUM -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+
+  <body>
+    <!-- HEADER NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img
+            src="assets/img/image.png"
+            alt="Logo Haur"
+            width="35"
+            height="28"
+            class="d-inline-block align-text-top"
+          />
+          <span>Toko Haur 🌿 <span class="badge bg-info text-dark border border-light-subtle fs-8">User</span></span>
+        </a>
+        
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Halaman Produk</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="shop.html">Keranjang Belanja</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active fw-bold" href="#" data-bs-toggle="dropdown">
+                Others
+              </a>
+              <ul class="dropdown-menu border-0 shadow-lg mt-2">
+                <li>
+                  <a class="dropdown-item" href="social.html"><i class="fab fa-instagram me-2 text-danger"></i>Social Media</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="contact.html"><i class="fas fa-envelope me-2 text-success"></i>Contact Me</a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item fw-bold text-info" href="user.html"><i class="fas fa-user me-2 text-info"></i>Dashboard User</a>
+                </li>
+                <li>
+                  <a class="dropdown-item fw-bold text-success" href="admin.html"><i class="fas fa-user-shield me-2 text-success"></i>Admin Dashboard</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="ms-auto" id="logout-btn-container" style="display: none;">
+          <button class="btn btn-outline-light rounded-pill px-4" id="logout-btn">
+            <i class="fas fa-sign-out-alt me-1"></i> Logout
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 1. LOGIN & REGISTER AREA -->
+    <div id="login-section" class="container py-5">
+      <div class="login-container">
+        <div class="login-card animated-fade-in-up">
+          <div class="text-center mb-4">
+            <i class="fas fa-user-circle fa-4x text-success mb-2"></i>
+            <h3 class="fw-800 text-secondary" id="auth-title">Sign-In Pembeli</h3>
+            <p class="text-muted small" id="auth-desc">Masuk untuk melihat riwayat pesanan Anda.</p>
+          </div>
+
+          <!-- Alert Container -->
+          <div id="auth-alert" class="alert d-none small p-2 mb-3 text-center"></div>
+
+          <!-- SIGN IN FORM -->
+          <form id="signin-form">
+            <div class="mb-3">
+              <label for="signin-email" class="form-label fw-semibold">Alamat Email</label>
+              <input type="email" class="form-control rounded-3" id="signin-email" placeholder="nama@email.com" required />
+            </div>
+            <div class="mb-4">
+              <label for="signin-password" class="form-label fw-semibold">Password</label>
+              <input type="password" class="form-control rounded-3" id="signin-password" placeholder="Masukkan password..." required />
+            </div>
+            <button type="submit" class="btn btn-premium btn-premium-primary w-100 py-3 rounded-pill" id="btn-signin-submit">
+              <i class="fas fa-sign-in-alt me-1"></i> Masuk Sekarang
+            </button>
+            <div class="text-center mt-3">
+              <span class="text-muted small">Belum punya akun? <a href="#" id="toggle-to-signup" class="text-success fw-bold text-decoration-none">Daftar di sini</a></span>
+            </div>
+          </form>
+
+          <!-- SIGN UP FORM -->
+          <form id="signup-form" style="display: none;">
+            <div class="mb-3">
+              <label for="signup-username" class="form-label fw-semibold">Nama / Username</label>
+              <input type="text" class="form-control rounded-3" id="signup-username" placeholder="Nama Anda..." required />
+            </div>
+            <div class="mb-3">
+              <label for="signup-email" class="form-label fw-semibold">Alamat Email</label>
+              <input type="email" class="form-control rounded-3" id="signup-email" placeholder="nama@email.com" required />
+            </div>
+            <div class="mb-4">
+              <label for="signup-password" class="form-label fw-semibold">Buat Password</label>
+              <input type="password" class="form-control rounded-3" id="signup-password" placeholder="Minimal 6 karakter..." required minlength="6" />
+            </div>
+            <button type="submit" class="btn btn-success w-100 py-3 rounded-pill" id="btn-signup-submit">
+              <i class="fas fa-user-plus me-1"></i> Buat Akun Baru
+            </button>
+            <div class="text-center mt-3">
+              <span class="text-muted small">Sudah punya akun? <a href="#" id="toggle-to-signin" class="text-success fw-bold text-decoration-none">Login di sini</a></span>
+            </div>
+          </form>
+
+          <div class="text-center mt-4">
+            <a href="index.html" class="text-success text-decoration-none small"><i class="fas fa-arrow-left me-1"></i> Kembali ke Toko</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. DASHBOARD AREA -->
+    <div id="dashboard-section" class="container py-5" style="display: none;">
+      <!-- Welcome Header -->
+      <div class="admin-header animated-fade-in-up mb-4" style="background: linear-gradient(135deg, #10b981 0%, #047857 100%);">
+        <div>
+          <h2 class="fw-800 mb-1" id="welcome-name">Selamat Datang, Pembeli 🌿</h2>
+          <p class="mb-0 text-white-50">Kelola profil dan pantau status pesanan Anda di sini.</p>
+        </div>
+        <div>
+          <a href="shop.html" class="btn btn-light rounded-pill px-4 fw-semibold text-success shadow-sm">
+            <i class="fas fa-shopping-cart me-1"></i> Keranjang Saya
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <ul class="nav admin-nav-tabs mb-4 animated-fade-in-up" id="userTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="tab-overview" data-tab="overview">
+            <i class="fas fa-chart-pie me-1"></i> Ringkasan
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-orders" data-tab="orders">
+            <i class="fas fa-box-open me-1"></i> Riwayat Pesanan
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-profile" data-tab="profile">
+            <i class="fas fa-user-edit me-1"></i> Pengaturan Profil
+          </button>
+        </li>
+      </ul>
+
+      <!-- Tab Content Area -->
+      <div class="tab-content" id="userTabContent">
+        
+        <!-- A. TAB OVERVIEW -->
+        <div class="tab-pane fade show active" id="pane-overview" role="tabpanel">
+          <div class="row g-4 mb-4 animated-fade-in-up">
+            <div class="col-md-4">
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-shopping-bag"></i></div>
+                <div class="stat-info">
+                  <h3 id="stat-total-orders">0</h3>
+                  <p>Total Pesanan Saya</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="stat-card">
+                <div class="stat-icon text-warning" style="background: rgba(245, 158, 11, 0.1);"><i class="fas fa-clock"></i></div>
+                <div class="stat-info">
+                  <h3 id="stat-pending-orders">0</h3>
+                  <p>Menunggu Konfirmasi</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="stat-card">
+                <div class="stat-icon text-success" style="background: rgba(16, 185, 129, 0.1);"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-info">
+                  <h3 id="stat-finished-orders">0</h3>
+                  <p>Pesanan Selesai</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- B. TAB ORDERS -->
+        <div class="tab-pane fade" id="pane-orders" role="tabpanel">
+          <div class="glass-container">
+            <h4 class="section-title-premium mb-4"><i class="fas fa-box-open text-success"></i> Riwayat Pesanan Saya</h4>
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead>
+                  <tr>
+                    <th>Invoice ID</th>
+                    <th>Tanggal</th>
+                    <th>Detail Pengiriman</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="user-order-list">
+                  <!-- Dinamis -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- C. TAB PROFILE -->
+        <div class="tab-pane fade" id="pane-profile" role="tabpanel">
+          <div class="glass-container" style="max-width: 600px; margin: 0 auto;">
+            <h4 class="section-title-premium mb-4"><i class="fas fa-user-edit text-success"></i> Pengaturan Profil</h4>
+            <form id="profile-form">
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Nama Lengkap</label>
+                <input type="text" class="form-control rounded-3" id="profileName" required />
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Nomor WhatsApp</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-white text-muted">+62</span>
+                  <input type="text" class="form-control rounded-3" id="profilePhone" required />
+                </div>
+              </div>
+              <div class="mb-4">
+                <label class="form-label fw-semibold">Alamat Lengkap</label>
+                <textarea class="form-control rounded-3" id="profileAddress" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-premium btn-premium-primary w-100 rounded-pill">Simpan Profil</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- DASHBOARD AREA END -->
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- DATABASE LOKAL & AUTH LOGIC -->
+    <script src="assets/js/db.js"></script>
+
+    <!-- LOGIKA DASHBOARD USER -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const loginSection = document.getElementById("login-section");
+        const dashboardSection = document.getElementById("dashboard-section");
+        const logoutBtnContainer = document.getElementById("logout-btn-container");
+        
+        // Check Auth using active user
+        function checkAuth() {
+          const activeUser = sessionStorage.getItem("haur_active_user");
+          if (activeUser) {
+            loginSection.style.display = "none";
+            dashboardSection.style.display = "block";
+            logoutBtnContainer.style.display = "block";
+            
+            initDashboardData();
+          } else {
+            loginSection.style.display = "block";
+            dashboardSection.style.display = "none";
+            logoutBtnContainer.style.display = "none";
+          }
+        }
+
+        // Toggle UI
+        const signinForm = document.getElementById("signin-form");
+        const signupForm = document.getElementById("signup-form");
+        const authTitle = document.getElementById("auth-title");
+        const authDesc = document.getElementById("auth-desc");
+        const authAlert = document.getElementById("auth-alert");
+
+        function showAlert(msg, isSuccess = true) {
+          authAlert.className = `alert small p-2 mb-3 text-center ${isSuccess ? 'alert-success' : 'alert-danger'}`;
+          authAlert.innerHTML = `<i class="fas ${isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${msg}`;
+          authAlert.classList.remove("d-none");
+        }
+
+        document.getElementById("toggle-to-signup").addEventListener("click", (e) => {
+          e.preventDefault();
+          signinForm.style.display = "none";
+          signupForm.style.display = "block";
+          authTitle.innerText = "Buat Akun Baru";
+          authDesc.innerText = "Daftar untuk memantau status pesanan dengan mudah.";
+          authAlert.classList.add("d-none");
+        });
+
+        document.getElementById("toggle-to-signin").addEventListener("click", (e) => {
+          e.preventDefault();
+          signupForm.style.display = "none";
+          signinForm.style.display = "block";
+          authTitle.innerText = "Sign-In Pembeli";
+          authDesc.innerText = "Masuk untuk melihat riwayat pesanan Anda.";
+          authAlert.classList.add("d-none");
+        });
+
+        // Sign Up Action
+        signupForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById("btn-signup-submit");
+          btn.innerHTML = `<i class="fas fa-spinner fa-spin me-1"></i> Memproses...`;
+          btn.disabled = true;
+
+          const name = document.getElementById("signup-username").value.trim();
+          const email = document.getElementById("signup-email").value.trim();
+          const pass = document.getElementById("signup-password").value;
+
+          const res = await registerUser(email, name, pass);
+          if (res.success) {
+            showAlert("Pendaftaran berhasil! Silakan Sign-In dengan email Anda.", true);
+            signupForm.reset();
+            document.getElementById("toggle-to-signin").click();
+          } else {
+            showAlert(res.message, false);
+          }
+          btn.innerHTML = `<i class="fas fa-user-plus me-1"></i> Buat Akun Baru`;
+          btn.disabled = false;
+        });
+
+        // Sign In Action
+        signinForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById("btn-signin-submit");
+          btn.innerHTML = `<i class="fas fa-spinner fa-spin me-1"></i> Memproses...`;
+          btn.disabled = true;
+
+          const email = document.getElementById("signin-email").value.trim();
+          const pass = document.getElementById("signin-password").value;
+
+          const res = await loginUser(email, pass);
+          if (res.success) {
+            const userData = res.data;
+            sessionStorage.setItem("haur_active_user", JSON.stringify(userData));
+            
+            // Check url params
+            const urlParams = new URLSearchParams(window.location.search);
+            if(urlParams.get('redirect') === 'checkout') {
+              window.location.href = 'shop.html?action=checkout';
+              return;
+            }
+            checkAuth();
+          } else {
+            showAlert(res.message, false);
+          }
+          btn.innerHTML = `<i class="fas fa-sign-in-alt me-1"></i> Masuk Sekarang`;
+          btn.disabled = false;
+        });
+
+        document.getElementById("logout-btn").addEventListener("click", () => {
+          if (confirm("Keluar dari akun Anda?")) {
+            sessionStorage.removeItem("haur_active_user");
+            checkAuth();
+          }
+        });
+
+        checkAuth();
+
+        // Tabs Logic
+        const tabs = document.querySelectorAll("#userTabs .nav-link");
+        const panes = document.querySelectorAll(".tab-pane");
+
+        tabs.forEach(tab => {
+          tab.addEventListener("click", (e) => {
+            tabs.forEach(t => t.classList.remove("active"));
+            panes.forEach(p => p.classList.remove("show", "active"));
+            e.currentTarget.classList.add("active");
+            document.getElementById("pane-" + e.currentTarget.getAttribute("data-tab")).classList.add("show", "active");
+          });
+        });
+            
+        // Dashboard Data
+        function initDashboardData() {
+          // get latest active user data
+          let currentUser = JSON.parse(sessionStorage.getItem("haur_active_user"));
+          
+          // Sinkronisasi dengan localStorage db.js jika LocalStorage fallback dipakai
+          if (!isSupabaseConfigured) {
+             let allUsers = JSON.parse(localStorage.getItem("haur_users")) || [];
+             const freshUser = allUsers.find(u => u.email === currentUser.email);
+             if (freshUser) {
+               currentUser = freshUser;
+               sessionStorage.setItem("haur_active_user", JSON.stringify(currentUser));
+             }
+          }
+
+          const profile = currentUser.profile || { nama: currentUser.username || currentUser.email, phone: "", address: "" };
+          
+          document.getElementById("welcome-name").innerText = `Selamat Datang, ${profile.nama.split(" ")[0]} 🌿`;
+          document.getElementById("profileName").value = profile.nama;
+          document.getElementById("profilePhone").value = profile.phone;
+          document.getElementById("profileAddress").value = profile.address;
+
+          // Ambil order yg mengandung nama atau WA user ini
+          const allOrders = getOrders();
+          const userOrders = allOrders.filter(o => {
+             // Jika phone diisi dan cocok
+             if (profile.phone && (o.whatsapp === profile.phone || o.whatsapp === "62" + profile.phone)) return true;
+             // Jika nama persis mengandung awalan
+             if (profile.nama && o.namaPelanggan.toLowerCase().includes(profile.nama.toLowerCase().split(" ")[0])) return true;
+             return false;
+          });
+
+          // Update Stats
+          const pendingCount = userOrders.filter(o => o.status === "Pending" || o.status === "Diproses").length;
+          const finishedCount = userOrders.filter(o => o.status === "Selesai").length;
+          
+          document.getElementById("stat-total-orders").innerText = userOrders.length;
+          document.getElementById("stat-pending-orders").innerText = pendingCount;
+          document.getElementById("stat-finished-orders").innerText = finishedCount;
+
+          // Render Table
+          const tableBody = document.getElementById("user-order-list");
+          tableBody.innerHTML = "";
+          
+          if (userOrders.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted py-4">Belum ada riwayat pesanan.</td></tr>`;
+          } else {
+            [...userOrders].reverse().forEach(o => {
+              let badgeClass = "badge-pending";
+              if (o.status === "Diproses") badgeClass = "badge-process";
+              if (o.status === "Dikirim") badgeClass = "badge-shipping";
+              if (o.status === "Selesai") badgeClass = "badge-success";
+
+              const tr = document.createElement("tr");
+              tr.innerHTML = `
+                <td class="fw-bold text-success">${o.id}</td>
+                <td class="small text-muted">${o.tanggal}</td>
+                <td class="small">Kurir: ${o.kurir}<br>Alamat: ${o.alamat}</td>
+                <td class="fw-bold">Rp ${parseInt(o.total).toLocaleString("id-ID")}</td>
+                <td><span class="badge-status ${badgeClass}">${o.status}</span></td>
+              `;
+              tableBody.appendChild(tr);
+            });
+          }
+        }
+
+        // Save Profile
+        document.getElementById("profile-form").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const profile = {
+            nama: document.getElementById("profileName").value.trim(),
+            phone: document.getElementById("profilePhone").value.trim(),
+            address: document.getElementById("profileAddress").value.trim()
+          };
+          
+          let currentUser = JSON.parse(sessionStorage.getItem("haur_active_user"));
+          
+          if (!isSupabaseConfigured) {
+             updateLocalUserProfile(currentUser.email, profile);
+          }
+          
+          currentUser.profile = profile;
+          sessionStorage.setItem("haur_active_user", JSON.stringify(currentUser));
+          
+          alert("💾 Profil berhasil diperbarui!");
+          initDashboardData();
+        });
+      });
+    </script>
+  </body>
+</html>

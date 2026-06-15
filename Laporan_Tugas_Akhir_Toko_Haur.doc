@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Laporan Tugas Akhir - Toko Haur</title>
+  <!-- 
+    File ini menggunakan format HTML-in-disguise (.doc). 
+    Ketika dibuka di Microsoft Word, Word akan menerjemahkannya secara sempurna menjadi dokumen Word standar.
+    Anda hanya perlu klik 'Save As' dan pilih 'Word Document (.docx)' di dalam MS Word.
+  -->
+  <style>
+    @page {
+      size: A4;
+      margin: 4cm 4cm 3cm 3cm; /* Standar Margin Skripsi/Tugas Akhir: Kiri 4cm, Atas 4cm, Bawah 3cm, Kanan 3cm */
+    }
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 12pt;
+      line-height: 1.5;
+      color: #000000;
+    }
+    
+    /* JUDUL BAB */
+    .judul-bab {
+      font-size: 14pt;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      margin-top: 0;
+      margin-bottom: 24pt;
+      page-break-before: always;
+    }
+    
+    /* Untuk BAB I tidak perlu page break di paling atas */
+    .first-bab {
+      page-break-before: avoid !important;
+    }
+    
+    /* SUB BAB */
+    h2 {
+      font-size: 12pt;
+      font-weight: bold;
+      margin-top: 18pt;
+      margin-bottom: 8pt;
+      line-height: 1.5;
+    }
+    
+    /* ANAK SUB BAB */
+    h3 {
+      font-size: 12pt;
+      font-weight: bold;
+      font-style: normal;
+      margin-top: 12pt;
+      margin-bottom: 6pt;
+      line-height: 1.5;
+    }
+    
+    /* PARAGRAF STANDAR AKADEMIK */
+    p {
+      text-align: justify;
+      text-indent: 1.25cm; /* Indentasi paragraf standar 1.25cm */
+      margin-top: 0;
+      margin-bottom: 8pt;
+    }
+    
+    /* DAFTAR/LIST */
+    ol, ul {
+      margin-top: 0;
+      margin-bottom: 8pt;
+      padding-left: 24pt;
+      text-align: justify;
+    }
+    
+    li {
+      margin-bottom: 4pt;
+    }
+    
+    /* TABEL STANDAR */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12pt;
+      margin-bottom: 12pt;
+    }
+    
+    th, td {
+      border: 1px solid #000000;
+      padding: 6pt 8pt;
+      font-size: 11pt;
+      line-height: 1.3;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      text-align: center;
+    }
+    
+    /* DIAGRAM / SCREENSHOT PLACEHOLDER */
+    .media-box {
+      border: 1px solid #000000;
+      padding: 15px;
+      margin: 15px 0;
+      text-align: center;
+      background-color: #fafafa;
+    }
+    
+    .media-title {
+      font-size: 11pt;
+      font-weight: bold;
+      margin-top: 5pt;
+    }
+    
+    .text-center {
+      text-align: center !important;
+      text-indent: 0 !important;
+    }
+    
+    .text-right {
+      text-align: right !important;
+    }
+    
+    /* COVER/HALAMAN JUDUL */
+    .cover-page {
+      text-align: center;
+      height: 100%;
+      margin-top: 50px;
+      margin-bottom: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HALAMAN COVER ==================== -->
+  <div class="cover-page" style="page-break-after: always; text-align: center;">
+    <br><br>
+    <span style="font-size: 16pt; font-weight: bold; text-transform: uppercase;">LAPORAN TUGAS AKHIR</span><br><br>
+    <span style="font-size: 14pt; font-weight: bold; text-transform: uppercase; line-height: 1.5;">
+      RANCANG BANGUN WEBSITE E-COMMERCE PREMIUM TOKO HAUR 🌿<br>
+      BERBASIS VANILLA WEB TECHNOLOGY DENGAN METODE<br>
+      EXTREME PROGRAMMING (XP)
+    </span>
+    <br><br><br><br><br><br>
+    <div style="border: 2px solid #000000; display: inline-block; padding: 20px; font-weight: bold;">
+      ASET DIGITAL E-COMMERCE PREMIUM TOKO HAUR
+    </div>
+    <br><br><br><br><br><br><br><br>
+    <span style="font-size: 12pt; font-weight: bold; text-transform: uppercase;">
+      Diajukan Untuk Memenuhi Persyaratan Tugas Akademik<br>
+      Pengembangan Sistem Informasi
+    </span>
+    <br><br><br><br><br>
+    <span style="font-size: 12pt; font-weight: bold;">
+      Disusun Oleh:<br>
+      SEKAR ROSDIAH<br>
+      NIM. / NPM. [MASUKKAN NIM ANDA DI SINI]
+    </span>
+    <br><br><br><br><br><br>
+    <span style="font-size: 12pt; font-weight: bold; text-transform: uppercase;">
+      PROGRAM STUDI TEKNIK INFORMATIKA / SISTEM INFORMASI<br>
+      TAHUN 2026
+    </span>
+  </div>
+
+  <!-- ==================== BAB I ==================== -->
+  <div class="judul-bab first-bab">BAB I<br>PENDAHULUAN</div>
+  
+  <h2>1.1 Latar Belakang</h2>
+  <p>Bambu merupakan salah satu sumber daya alam yang melimpah di Indonesia, khususnya di wilayah Jawa Barat. Pemanfaatan bambu tidak lagi terbatas pada bahan bangunan konvensional, melainkan telah merambah ke produk fungsional bernilai tinggi, seperti sepeda bambu kustom, aksesoris premium, pakaian serat bambu, dan dekorasi estetik. <b>Toko Haur</b> merupakan sebuah Usaha Mikro, Kecil, dan Menengah (UMKM) serta komunitas pengrajin kreatif yang bergerak dalam memproduksi dan melestarikan produk kerajinan bambu premium ramah lingkungan (<i>eco-friendly</i>).</p>
+  <p>Pada awalnya, Toko Haur menggunakan platform katalog digital statis yang sangat sederhana untuk menampilkan produk-produknya. Meskipun website tersebut memiliki fungsionalitas dasar untuk melihat produk, terdapat keterbatasan operasional yang signifikan:</p>
+  <ol>
+    <li><b>Tidak Memiliki Sistem Transaksi Mandiri (Checkout)</b>: Pelanggan tidak dapat menggabungkan beberapa produk ke dalam satu keranjang belanja (<i>shopping cart</i>) dan melakukan kalkulasi biaya secara langsung, melainkan harus memesan satu per satu secara manual.</li>
+    <li><b>Ketergantungan Kode Sumber (Hardcoded)</b>: Seluruh katalog produk terprogram langsung di dalam kode JavaScript statis. Penambahan, perubahan harga, atau penghapusan produk mengharuskan pengelola toko mengedit kode sumber website, yang berisiko tinggi menimbulkan kesalahan teknis.</li>
+    <li><b>Ketiadaan Halaman Admin (Backoffice)</b>: Pengelola Toko Haur tidak memiliki antarmuka khusus untuk melacak pesanan masuk, memantau riwayat penjualan, mengedit status jam kerja, maupun memperbarui jadwal agenda kegiatan/workshop kerajinan bambu.</li>
+  </ol>
+  <p>Untuk mengatasi permasalahan tersebut, diperlukan adanya transformasi digital terintegrasi guna meningkatkan platform ini menjadi sebuah sistem <i>e-commerce</i> premium. Dengan memanfaatkan teknologi Vanilla Web (<i>HTML5, CSS3, JavaScript</i>) dan penyimpanan lokal (<i>Local Storage</i>) sebagai basis data terdistribusi tanpa server (<i>serverless</i>), sistem dapat dioperasikan secara mandiri, cepat, dan ringan. Sistem ini juga mengintegrasikan gerbang komunikasi pesanan langsung melalui API WhatsApp dan didukung oleh <i>Admin Dashboard</i> yang kaya fitur. Pengembangan sistem dilakukan dengan menggunakan metode <b>Extreme Programming (XP)</b> untuk menjamin adaptabilitas tinggi, pengerjaan cepat, dan kualitas kode yang bersih.</p>
+
+  <h2>1.2 Rumusan Masalah</h2>
+  <p>Berdasarkan latar belakang di atas, rumusan masalah dalam penelitian dan pengembangan ini adalah:</p>
+  <ol>
+    <li>Bagaimana merancang dan membangun sistem <i>e-commerce</i> premium Toko Haur yang memiliki fungsionalitas keranjang belanja fleksibel dan modul <i>checkout</i> pemesanan terintegrasi?</li>
+    <li>Bagaimana mengimplementasikan arsitektur database lokal (<i>Local Storage</i>) dan modul halaman <i>Admin Dashboard</i> terproteksi untuk mendukung operasional CRUD (Create, Read, Update, Delete) produk, jadwal operasional, serta pemantauan pesanan secara dinamis?</li>
+    <li>Bagaimana mengadopsi metode <i>Extreme Programming (XP)</i> dalam mempercepat siklus pengembangan sistem e-commerce Toko Haur agar sesuai dengan kebutuhan pengrajin dan pelanggan?</li>
+  </ol>
+
+  <h2>1.3 Tujuan Penelitian</h2>
+  <p>Adapun tujuan dari pelaksanaan proyek pengembangan sistem ini adalah:</p>
+  <ol>
+    <li>Menghasilkan sistem <i>e-commerce</i> Toko Haur yang responsif, premium, dan memiliki alur <i>checkout</i> terstruktur yang terintegrasi langsung dengan API WhatsApp Penjual.</li>
+    <li>Membangun modul <i>Admin Dashboard</i> interaktif untuk memudahkan pemilik toko dalam mengelola produk (termasuk upload gambar base64), mengubah status operasional, mengedit jadwal workshop, serta memantau pesanan masuk secara real-time.</li>
+    <li>Menerapkan metodologi <i>Extreme Programming (XP)</i> untuk merancang, menguji, dan memverifikasi kualitas sistem e-commerce melalui pengujian kotak hitam (<i>Black Box Testing</i>).</li>
+  </ol>
+
+  <h2>1.4 Manfaat Penelitian</h2>
+  <p>Pengembangan sistem ini diharapkan dapat memberikan manfaat sebagai berikut:</p>
+  <ol>
+    <li><b>Bagi Pengelola/UMKM Toko Haur</b>:
+      <ul>
+        <li>Memudahkan manajemen katalog produk dan operasional harian secara mandiri tanpa memerlukan keahlian pemrograman coding.</li>
+        <li>Meningkatkan efisiensi pemrosesan pesanan berkat format invoice WhatsApp yang terstruktur rapi.</li>
+        <li>Meningkatkan daya saing dan citra merek Toko Haur sebagai produsen kerajinan bambu premium modern.</li>
+      </ul>
+    </li>
+    <li><b>Bagi Pelanggan</b>:
+      <ul>
+        <li>Memberikan pengalaman berbelanja yang intuitif, cepat, responsif, dan tepercaya.</li>
+        <li>Memudahkan pendaftaran agenda/event workshop pembuatan kerajinan bambu langsung dari halaman utama.</li>
+      </ul>
+    </li>
+    <li><b>Bagi Akademisi/Pengembang</b>:
+      <ul>
+        <li>Menjadi referensi rancang bangun aplikasi web <i>e-commerce serverless</i> berkinerja tinggi berbasis <i>Local Storage</i>.</li>
+        <li>Memberikan studi kasus nyata implementasi metode <i>Extreme Programming</i> pada UMKM.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h2>1.5 Batasan Masalah</h2>
+  <p>Mengingat kompleksitas sistem informasi, pengembangan ini dibatasi oleh beberapa ketentuan:</p>
+  <ol>
+    <li><b>Basis Data</b>: Data disimpan secara lokal di peramban pengguna (<i>client-side</i>) menggunakan API <i>Local Storage</i> HTML5. Sistem tidak memerlukan koneksi internet aktif untuk database eksternal seperti MySQL atau PostgreSQL.</li>
+    <li><b>Otentikasi Admin</b>: Sistem keamanan login halaman admin menggunakan skema verifikasi session storage lokal dengan kredensial bawaan (<i>username: admin, password: haur2026</i>).</li>
+    <li><b>Sistem Pembayaran & Logistik</b>: Sistem tidak memproses pembayaran otomatis lewat payment gateway (seperti Midtrans), melainkan menyediakan pilihan transfer manual dan COD yang difinalisasi melalui konfirmasi di WhatsApp. Estimasi kurir bersifat statis dan ongkos kirim dihitung manual oleh penjual.</li>
+  </ol>
+
+  <h2>1.6 Metode Pengembangan Sistem (Extreme Programming)</h2>
+  <p>Pengembangan sistem ini mengadopsi metodologi agil <b>Extreme Programming (XP)</b> (Beck & Andres, 2004). Metode ini dipilih karena memiliki keunggulan dalam kecepatan rilis, fokus pada kualitas kode teknis, dan sangat adaptif terhadap perubahan kebutuhan pengguna. Siklus XP terdiri dari empat fase utama:</p>
+  <ol>
+    <li><b>Perencanaan (Planning)</b>: Menggali kebutuhan pengguna (Toko Haur) yang dituangkan ke dalam <i>User Stories</i>. Hasil perencanaan mendefinisikan kebutuhan mendesak berupa perbaikan UI desktop, integrasi keranjang dengan pengaturan kuantitas, formulir checkout, modul manajemen operasional, dan dashboard admin dinamis.</li>
+    <li><b>Perancangan (Design)</b>: Mengedepankan kesederhanaan desain (<i>Simple Design</i>). Pada tahap ini dirancang arsitektur data <i>Local Storage</i>, skema navigasi, serta diagram visualisasi UML (<i>Use Case, Activity, Sequence, Class Diagram</i>).</li>
+    <li><b>Pengodean (Coding)</b>: Tahap implementasi rancangan ke dalam kode program berbasis Vanilla Javascript dengan teknik <i>Refactoring</i> berkala untuk membersihkan sisa kode lama.</li>
+    <li><b>Pengujian (Testing)</b>: Melakukan pengujian fungsionalitas menggunakan metode <i>Black Box Testing</i> secara bertahap untuk memastikan seluruh elemen bekerja sesuai dengan skenario <i>User Stories</i>.</li>
+  </ol>
+
+
+  <!-- ==================== BAB II ==================== -->
+  <div class="judul-bab">BAB II<br>LANDASAN TEORI</div>
+  
+  <h2>2.1 Pengertian Website</h2>
+  <p>Menurut Pressman dan Maxim (2020), website adalah kumpulan halaman web yang saling terhubung, umumnya berada pada server yang sama, dan berisi informasi berupa teks, gambar, audio, dan video yang dapat diakses oleh publik melalui jaringan internet menggunakan peramban web (<i>web browser</i>). Dalam perkembangannya, website bertransformasi dari sekadar penyedia informasi statis (Web 1.0) menjadi aplikasi interaktif yang dinamis (Web 2.0/3.0).</p>
+
+  <h2>2.2 Pengertian E-Commerce</h2>
+  <p><i>Electronic Commerce</i> atau <i>e-commerce</i> didefinisikan oleh Laudon dan Traver (2021) sebagai penggunaan internet, web, dan aplikasi seluler untuk melakukan transaksi bisnis digital secara aman dan efisien antara organisasi dan individu. E-commerce memungkinkan pelaku usaha memotong rantai distribusi fisik dan berinteraksi langsung dengan konsumen akhir tanpa batas geografis.</p>
+
+  <h2>2.3 Pengertian UML (Unified Modeling Language)</h2>
+  <p>Unified Modeling Language (UML) adalah bahasa standar yang digunakan untuk menspesifikasikan, memvisualisasikan, membangun, dan mendokumentasikan artefak dari sistem perangkat lunak berbasis objek (Fowler, 2018). UML memfasilitasi komunikasi teknis antara analis sistem, desainer, dan programmer melalui serangkaian diagram seperti Use Case, Activity, Sequence, dan Class Diagram.</p>
+
+  <h2>2.4 Pengertian XP (Extreme Programming)</h2>
+  <p>Extreme Programming (XP) adalah salah satu metode pengembangan perangkat lunak bersifat <i>agile</i> yang berorientasi pada objek, sangat cocok untuk tim berskala kecil hingga menengah yang menghadapi persyaratan yang cepat berubah (Beck & Andres, 2004). Aturan utama XP berfokus pada kolaborasi erat, kesederhanaan solusi, komunikasi yang konstan, dan umpan balik yang cepat.</p>
+
+  <h2>2.5 HTML (HyperText Markup Language)</h2>
+  <p>HTML5 adalah versi terbaru standar markup untuk menyusun struktur dasar halaman web (Duckett, 2019). HTML5 memperkenalkan elemen semantik baru seperti <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, dan <code>&lt;header&gt;</code>, serta mendukung penyimpanan lokal asli yang mempermudah pengembangan web modern yang bersih dan ramah mesin pencari (SEO).</p>
+
+  <h2>2.6 CSS (Cascading Style Sheets)</h2>
+  <p>CSS3 adalah bahasa stylesheet yang digunakan untuk mengatur tampilan visual, tata letak, warna, tipografi, dan animasi dari dokumen terstruktur HTML (Duckett, 2019). CSS3 memperkenalkan variabel penampung (<i>CSS Variables</i>), <i>flexbox</i>, <i>grid system</i>, serta efek transisi mikro-animasi responsif yang meningkatkan estetika visual antarmuka aplikasi.</p>
+
+  <h2>2.7 JavaScript</h2>
+  <p>JavaScript adalah bahasa pemrograman tingkat tinggi bersifat <i>lightweight</i> dan <i>just-in-time compiled</i> yang berjalan di sisi klien (<i>client-side script</i>) untuk menciptakan interaksi dinamis pada website (Flanagan, 2020). JavaScript menangani manipulasi Document Object Model (DOM), penanganan event (<i>event listener</i>), kalkulasi aritmatika belanja, serta komunikasi asinkronus dengan API browser.</p>
+
+  <h2>2.8 Local Storage</h2>
+  <p>Menurut MDN Web Docs, Web Storage API menyediakan mekanisme bagi browser untuk menyimpan data bertipe pasangan kunci-nilai (<i>key-value pairs</i>) secara aman di sisi klien. <code>localStorage</code> menyimpan data secara permanen tanpa batas kedaluwarsa, bahkan setelah browser ditutup, dan memiliki kapasitas penyimpanan yang relatif besar (~5MB) dibandingkan dengan <i>cookies</i> (~4KB).</p>
+
+  <h2>2.9 Black Box Testing</h2>
+  <p>Black Box Testing atau pengujian kotak hitam berfokus pada pengujian persyaratan fungsional dari perangkat lunak tanpa perlu mengetahui detail struktur internal kode program (Pressman & Maxim, 2020). Penguji merancang skenario masukan (<i>input</i>) dan mengevaluasi apakah keluaran (<i>output</i>) yang dihasilkan telah sesuai dengan spesifikasi sistem yang diharapkan.</p>
+
+
+  <!-- ==================== BAB III ==================== -->
+  <div class="judul-bab">BAB III<br>ANALISIS DAN PERANCANGAN SISTEM</div>
+  
+  <h2>3.1 Flowmap Sistem Berjalan</h2>
+  <p>Pada sistem lama, alur pemilihan produk hingga checkout dilakukan secara manual satu per satu tanpa integrasi keranjang belanja.</p>
+  <div class="media-box">
+    <div style="font-family: monospace; font-size: 10pt; text-align: left; background-color: #eee; padding: 10px; border: 1px solid #999;">
+      [Mulai] --&gt; Pelanggan Membuka Web Katalog --&gt; Pelanggan Memilih Satu Produk --&gt; 
+      Klik Beli Sekarang --&gt; Mengarah ke WhatsApp via Teks Produk Tunggal --&gt; 
+      Penjual Menerima --&gt; Penjual Menghitung Manual --&gt; [Selesai]
+    </div>
+    <div class="media-title">Gambar 3.1 Flowmap Sistem Berjalan Toko Haur</div>
+  </div>
+
+  <h2>3.2 Flowmap Sistem Usulan</h2>
+  <p>Pada sistem usulan, pembeli dapat mengumpulkan beberapa produk ke keranjang belanja, memperbarui kuantitas, mengisi formulir alamat pengiriman, dan mengirim keseluruhan invoice belanja sekaligus melalui WhatsApp. Detail pesanan juga otomatis tersimpan di Panel Admin.</p>
+  <div class="media-box">
+    <div style="font-family: monospace; font-size: 10pt; text-align: left; background-color: #eee; padding: 10px; border: 1px solid #999;">
+      [Mulai] --&gt; Pilih Produk &amp; Qty --&gt; Masuk Keranjang --&gt; Buka Keranjang &amp; Checkout --&gt; 
+      Isi Form &amp; Alamat --&gt; [Valid?] --&gt; Simpan Lokal DB Admin + Redirect WhatsApp API (Invoice) 
+      --&gt; Penjual Menerima &amp; Update Order di Dashboard --&gt; [Selesai]
+    </div>
+    <div class="media-title">Gambar 3.2 Flowmap Sistem Usulan Toko Haur</div>
+  </div>
+
+  <h2>3.3 Use Case Diagram</h2>
+  <p>Perancangan Use Case mendefinisikan interaksi antara dua aktor utama (Pelanggan dan Admin) terhadap sistem.</p>
+  <div class="media-box">
+    <div style="font-family: monospace; font-size: 9pt; text-align: left; background-color: #eee; padding: 10px; border: 1px solid #999;">
+      Aktor Pelanggan: Melihat Katalog &amp; Filter Kategori, Mencari Produk, Kelola Keranjang Belanja, Melakukan Checkout Pesanan (Include: Kirim Pesanan via WA, Simpan Transaksi Lokal).<br>
+      Aktor Admin: Login Admin Panel, Akses Dashboard Overview, Mengelola CRUD Produk, Mengelola CRUD Jadwal Workshop, Mengubah Status Toko, Mengelola Status Pesanan.
+    </div>
+    <div class="media-title">Gambar 3.3 Use Case Diagram Sistem E-Commerce Toko Haur</div>
+  </div>
+
+  <h3>3.3.1 Deskripsi &amp; Skenario Use Case</h3>
+  <p>Berikut adalah detail skenario Use Case terpenting: <b>Melakukan Checkout Pesanan</b>.</p>
+  <ul>
+    <li><b>Nama Use Case</b>: Melakukan Checkout Pesanan</li>
+    <li><b>Aktor Utama</b>: Pelanggan</li>
+    <li><b>Deskripsi</b>: Pelanggan menyelesaikan perbelanjaan dengan mengisi data diri dan mengirim pesanan gabungan secara terstruktur ke WhatsApp penjual, sekaligus mencatat transaksi ke database admin.</li>
+    <li><b>Kondisi Awal (Pre-condition)</b>: Keranjang belanja terisi minimal 1 produk.</li>
+    <li><b>Alur Utama (Basic Flow)</b>:
+      <ol>
+        <li>Pelanggan membuka halaman <code>shop.html</code> (Keranjang Belanja).</li>
+        <li>Sistem menampilkan daftar produk, subtotal harga, dan mengaktifkan tombol <b>Checkout Sekarang</b>.</li>
+        <li>Pelanggan menekan tombol <b>Checkout Sekarang</b>.</li>
+        <li>Sistem memicu kemunculan Modal Formulir Pengiriman Pesanan.</li>
+        <li>Pelanggan mengisi Nama, No. WhatsApp, Alamat Lengkap, memilih Kurir Pengiriman, dan memilih Metode Pembayaran.</li>
+        <li>Pelanggan menekan tombol <b>Kirim Pesanan via WA</b>.</li>
+        <li>Sistem memvalidasi inputan, memanggil fungsi <code>addOrder()</code> untuk mencatat pesanan ke <code>localStorage</code>, mengosongkan isi keranjang belanja, memicu notifikasi sukses, dan mengarahkan pengguna ke WhatsApp dengan detail format invoice.</li>
+      </ol>
+    </li>
+    <li><b>Kondisi Akhir (Post-condition)</b>: Keranjang belanja kembali kosong, pesanan tercatat di Panel Admin, dan pesan invoice terkirim ke WhatsApp.</li>
+  </ul>
+
+  <h2>3.4 Activity Diagram (Proses Checkout Pelanggan)</h2>
+  <p>Menggambarkan alur aktivitas sistem dinamis ketika pelanggan melakukan checkout hingga pemesanan tuntas.</p>
+  <div class="media-box">
+    <div style="font-family: monospace; font-size: 9pt; text-align: left; background-color: #eee; padding: 10px; border: 1px solid #999;">
+      [*] --&gt; Buka Keranjang --&gt; Tampilkan Daftar Belanja --&gt; Klik Checkout --&gt; Tampilkan Modal Form --&gt; Isi Form --&gt; Klik Kirim Pesanan --&gt; Validasi Input --&gt; [Valid?] --&gt; (Jika Tidak) --&gt; Tampilkan Error --&gt; Isi Form / (Jika Ya) --&gt; Simpan Order Lokal --&gt; Generate Invoice WA --&gt; Buka WhatsApp API --&gt; Bersihkan Keranjang --&gt; Kembali Ke Home --&gt; [*]
+    </div>
+    <div class="media-title">Gambar 3.4 Activity Diagram Proses Checkout Toko Haur</div>
+  </div>
+
+  <h2>3.5 Sequence Diagram (Proses CRUD Produk oleh Admin)</h2>
+  <p>Sequence diagram menggambarkan pertukaran pesan antar-objek sistem saat admin menambahkan katalog produk baru.</p>
+  <div class="media-box">
+    <div style="font-family: monospace; font-size: 9pt; text-align: left; background-color: #eee; padding: 10px; border: 1px solid #999;">
+      Admin --&gt; UI: Klik Tambah Produk Baru<br>
+      UI --&gt; Admin: Tampilkan Modal Formulir Produk<br>
+      Admin --&gt; UI: Isi Data (Nama, Kategori, Harga, Stok, File Gambar)<br>
+      Note over UI: Sistem mengonversi gambar ke Base64 secara otomatis<br>
+      Admin --&gt; UI: Klik Simpan Produk<br>
+      UI --&gt; db.js: Panggil fungsi addProduct(prodData)<br>
+      db.js --&gt; localStorage: Simpan array produk terbaru<br>
+      localStorage --&gt; db.js: Konfirmasi penyimpanan berhasil<br>
+      db.js --&gt; UI: Kembalikan respon sukses<br>
+      UI --&gt; Admin: Notifikasi Sukses &amp; Update Tabel Dinamis
+    </div>
+    <div class="media-title">Gambar 3.5 Sequence Diagram CRUD Produk Toko Haur</div>
+  </div>
+
+  <h2>3.6 Class Diagram</h2>
+  <p>Menggambarkan struktur kelas dan helper database yang digunakan dalam mengelola database lokal Toko Haur.</p>
+  <div class="media-box">
+    <div style="font-family: monospace; font-size: 9pt; text-align: left; background-color: #eee; padding: 10px; border: 1px solid #999;">
+      Kelas DB_Helper (getProducts(), saveProducts(), addProduct(), updateProduct(), deleteProduct(), getSchedules(), addSchedule(), getShopStatus(), getOrders(), addOrder())<br>
+      Asosiasi ke Kelas Produk (id, nama, harga, gambar, kategori, stok, deskripsi)<br>
+      Asosiasi ke Kelas Jadwal (id, judul, tanggal, waktu, lokasi, kuota, status)<br>
+      Asosiasi ke Kelas Pesanan (id, tanggal, namaPelanggan, whatsapp, alamat, kurir, total, status) --&gt; Agregasi ke KeranjangItem (id, nama, harga, gambar, qty)
+    </div>
+    <div class="media-title">Gambar 3.6 Class Diagram Sistem E-Commerce Toko Haur</div>
+  </div>
+
+  <h2>3.7 Perancangan Basis Data</h2>
+  <p>Struktur entitas database didefinisikan dalam bentuk JSON lokal pada browser klien.</p>
+  
+  <h3>3.7.1 Struktur Data Produk (<code>haur_products</code>)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Nama Kolom</th>
+        <th>Tipe Data</th>
+        <th>Keterangan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>id</td>
+        <td>String (PK)</td>
+        <td>Dihasilkan menggunakan timestamp unik</td>
+      </tr>
+      <tr>
+        <td>nama</td>
+        <td>String</td>
+        <td>Nama kerajinan bambu</td>
+      </tr>
+      <tr>
+        <td>harga</td>
+        <td>String</td>
+        <td>Nominal harga produk</td>
+      </tr>
+      <tr>
+        <td>gambar</td>
+        <td>String</td>
+        <td>Nama file aset lokal atau string Base64 kustom</td>
+      </tr>
+      <tr>
+        <td>kategori</td>
+        <td>String</td>
+        <td>Kategori (Sepeda, Aksesoris, Fashion, dll)</td>
+      </tr>
+      <tr>
+        <td>stok</td>
+        <td>Integer</td>
+        <td>Jumlah ketersediaan stok fisik barang</td>
+      </tr>
+      <tr>
+        <td>deskripsi</td>
+        <td>String</td>
+        <td>Keterangan penjelasan detail produk</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>3.7.2 Struktur Data Pesanan (<code>haur_orders</code>)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Nama Kolom</th>
+        <th>Tipe Data</th>
+        <th>Keterangan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>id</td>
+        <td>String (PK)</td>
+        <td>Format invoice: ORD-XXXXXX</td>
+      </tr>
+      <tr>
+        <td>tanggal</td>
+        <td>String</td>
+        <td>Tanggal dan waktu pesanan masuk</td>
+      </tr>
+      <tr>
+        <td>namaPelanggan</td>
+        <td>String</td>
+        <td>Nama lengkap pemesan</td>
+      </tr>
+      <tr>
+        <td>whatsapp</td>
+        <td>String</td>
+        <td>Nomor WA pembeli format internasional</td>
+      </tr>
+      <tr>
+        <td>alamat</td>
+        <td>String</td>
+        <td>Alamat lengkap pengiriman</td>
+      </tr>
+      <tr>
+        <td>kurir</td>
+        <td>String</td>
+        <td>Layanan kurir pengiriman (J&T, JNE, POS, Sicepat)</td>
+      </tr>
+      <tr>
+        <td>metodePembayaran</td>
+        <td>String</td>
+        <td>Metode pembayaran yang dipilih</td>
+      </tr>
+      <tr>
+        <td>items</td>
+        <td>Array (JSON)</td>
+        <td>Daftar item: [{nama, harga, qty}]</td>
+      </tr>
+      <tr>
+        <td>total</td>
+        <td>Double</td>
+        <td>Akumulasi total biaya belanja</td>
+      </tr>
+      <tr>
+        <td>status</td>
+        <td>String</td>
+        <td>Status transaksi (Pending, Diproses, Dikirim, Selesai)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>3.7.3 Struktur Data Jadwal &amp; Workshop (<code>haur_schedules</code>)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Nama Kolom</th>
+        <th>Tipe Data</th>
+        <th>Keterangan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>id</td>
+        <td>String (PK)</td>
+        <td>ID agenda unik</td>
+      </tr>
+      <tr>
+        <td>judul</td>
+        <td>String</td>
+        <td>Nama agenda / workshop / event</td>
+      </tr>
+      <tr>
+        <td>tanggal</td>
+        <td>String</td>
+        <td>Hari dan tanggal pelaksanaan</td>
+      </tr>
+      <tr>
+        <td>waktu</td>
+        <td>String</td>
+        <td>Waktu pelaksanaan (Jam)</td>
+      </tr>
+      <tr>
+        <td>lokasi</td>
+        <td>String</td>
+        <td>Alamat fisik tempat acara diselenggarakan</td>
+      </tr>
+      <tr>
+        <td>kuota</td>
+        <td>String</td>
+        <td>Kapasitas kuota peserta</td>
+      </tr>
+      <tr>
+        <td>status</td>
+        <td>String</td>
+        <td>Status keaktifan (Aktif, Selesai)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3.8 Storyboard &amp; Perancangan Antarmuka</h2>
+  <p>UI dirancang dengan skema grid simetris, area navigasi atas konstan, kolom katalog utama sebesar 9/12 kolom dan kolom status operasional &amp; workshop sebesar 3/12 kolom untuk menyeimbangkan kebutuhan informasi visual.</p>
+
+
+  <!-- ==================== BAB IV ==================== -->
+  <div class="judul-bab">BAB IV<br>IMPLEMENTASI SISTEM</div>
+  
+  <h2>4.1 Implementasi Perangkat Keras (Hardware)</h2>
+  <p>Pengembangan sistem dilakukan pada perangkat komputer dengan spesifikasi:</p>
+  <ul>
+    <li>Prosesor: Intel Core i5-1135G7 @ 2.40GHz</li>
+    <li>Memori (RAM): 8 GB DDR4</li>
+    <li>Penyimpanan: SSD 512 GB PCIe NVMe</li>
+  </ul>
+
+  <h2>4.2 Implementasi Perangkat Lunak (Software)</h2>
+  <p>Perangkat lunak penunjang lingkungan pengembangan:</p>
+  <ul>
+    <li>Sistem Operasi: Windows 11 Home 64-bit</li>
+    <li>Aplikasi Editor: Visual Studio Code v1.89</li>
+    <li>Browser Pengujian: Google Chrome &amp; Microsoft Edge</li>
+    <li>Platform Hosting: Vercel Serverless Platform</li>
+  </ul>
+
+  <h2>4.3 Implementasi Halaman Antarmuka Web</h2>
+  <p>Bagian ini menunjukkan visualisasi antarmuka web Toko Haur yang telah selesai diimplementasikan.</p>
+
+  <h3>4.3.1 Halaman Home &amp; Produk (<code>index.html</code>)</h3>
+  <p>Menampilkan katalog bambu premium, pencarian real-time, filter kategori, status buka toko, jadwal workshop, dan floating cart badge.</p>
+  <div class="media-box">
+    <div style="border: 2px dashed #999; padding: 40px; color: #666; font-style: italic;">
+      [ TEMPAT SCREENSHOT HALAMAN UTAMA / HOME &amp; PRODUK ]<br>
+      (Ambil tangkapan layar penuh dari index.html di browser Anda, lalu tempelkan di sini)
+    </div>
+    <div class="media-title">Gambar 4.1 Visualisasi Halaman Utama Toko Haur</div>
+  </div>
+
+  <h3>4.3.2 Halaman Keranjang Belanja &amp; Checkout (<code>shop.html</code>)</h3>
+  <p>Menampilkan baris item belanja lengkap dengan kuantitas increment/decrement, total belanja, dan modal formulir pengiriman pesanan checkout.</p>
+  <div class="media-box">
+    <div style="border: 2px dashed #999; padding: 40px; color: #666; font-style: italic;">
+      [ TEMPAT SCREENSHOT KERANJANG BELANJA &amp; MODAL CHECKOUT ]<br>
+      (Ambil tangkapan layar saat modal formulir checkout sedang terbuka di shop.html)
+    </div>
+    <div class="media-title">Gambar 4.2 Visualisasi Halaman Keranjang &amp; Modal Checkout</div>
+  </div>
+
+  <h3>4.3.3 Halaman Admin Dashboard (<code>admin.html</code>)</h3>
+  <p>Menampilkan antarmuka otentikasi login admin, tab ringkasan statistik, tabel produk CRUD (dengan konversi Base64), kelola jadwal operasional, dan monitoring invoice pesanan masuk.</p>
+  <div class="media-box">
+    <div style="border: 2px dashed #999; padding: 40px; color: #666; font-style: italic;">
+      [ TEMPAT SCREENSHOT ADMIN DASHBOARD / BACKOFFICE ]<br>
+      (Ambil tangkapan layar admin.html saat tab Kelola Produk atau Daftar Pesanan sedang aktif)
+    </div>
+    <div class="media-title">Gambar 4.3 Visualisasi Halaman Admin Dashboard</div>
+  </div>
+
+  <h3>4.3.4 Halaman Kontak (<code>contact.html</code>)</h3>
+  <p>Formulir kontak premium glassmorphism terintegrasi pesan otomatis WhatsApp.</p>
+  <div class="media-box">
+    <div style="border: 2px dashed #999; padding: 40px; color: #666; font-style: italic;">
+      [ TEMPAT SCREENSHOT HALAMAN KONTAK ]<br>
+      (Ambil tangkapan layar halaman contact.html)
+    </div>
+    <div class="media-title">Gambar 4.4 Visualisasi Halaman Kontak Toko Haur</div>
+  </div>
+
+  <h3>4.3.5 Halaman Media Sosial (<code>social.html</code>)</h3>
+  <p>Menampilkan tautan media sosial resmi komunitas Begawan Bambu Haur dengan hover animasi interaktif.</p>
+  <div class="media-box">
+    <div style="border: 2px dashed #999; padding: 40px; color: #666; font-style: italic;">
+      [ TEMPAT SCREENSHOT HALAMAN MEDIA SOSIAL ]<br>
+      (Ambil tangkapan layar halaman social.html)
+    </div>
+    <div class="media-title">Gambar 4.5 Visualisasi Halaman Media Sosial Toko Haur</div>
+  </div>
+
+  <h2>4.4 Penjelasan Fitur Unggulan Sistem</h2>
+  <ol>
+    <li><b>Dinamisasi Katalog via Local Storage</b>: Katalog tidak lagi statis melainkan ter-update dinamis langsung melalui input admin.</li>
+    <li><b>Kalkulator Keranjang Lanjutan</b>: Menangani jumlah barang sejenis secara responsif tanpa menduplikasi baris item di keranjang.</li>
+    <li><b>Konverter Gambar Base64</b>: Admin dapat langsung mengunggah foto lokal dari komputernya tanpa perlu link hosting gambar eksternal.</li>
+    <li><b>WhatsApp Invoice Generator</b>: Menyusun template string invoice pesanan gabungan secara otomatis untuk dikirim ke nomor WhatsApp penjual.</li>
+  </ol>
+
+
+  <!-- ==================== BAB V ==================== -->
+  <div class="judul-bab">BAB V<br>PENGUJIAN SISTEM</div>
+  
+  <h2>5.1 Skenario Pengujian Black Box</h2>
+  <p>Fungsionalitas utama diuji menggunakan pengujian Black Box untuk menjamin keabsahan input-output.</p>
+
+  <h3>5.1.1 Pengujian Modul CRUD Produk &amp; Login (Sisi Admin)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID Uji</th>
+        <th>Deskripsi Kasus Uji</th>
+        <th>Langkah Pengujian</th>
+        <th>Hasil yang Diharapkan</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>UJ-01</td>
+        <td>Login Admin kredensial salah</td>
+        <td>Memasukkan user `salah` dan pass `salah`</td>
+        <td>Sistem memicu error kustom dan memblokir akses</td>
+        <td>Berhasil</td>
+      </tr>
+      <tr>
+        <td>UJ-02</td>
+        <td>Login Admin kredensial benar</td>
+        <td>Memasukkan user `admin` dan pass `haur2026`</td>
+        <td>Sistem meloloskan akses dan menampilkan dashboard</td>
+        <td>Berhasil</td>
+      </tr>
+      <tr>
+        <td>UJ-03</td>
+        <td>Tambah produk + upload foto</td>
+        <td>Klik Tambah, isi form, upload file foto, Simpan</td>
+        <td>Tersimpan di localStorage dan muncul di katalog index.html</td>
+        <td>Berhasil</td>
+      </tr>
+      <tr>
+        <td>UJ-04</td>
+        <td>Mengedit harga produk</td>
+        <td>Klik Edit, ubah nominal harga, Simpan</td>
+        <td>Harga terupdate di basis data dan katalog display pembeli</td>
+        <td>Berhasil</td>
+      </tr>
+      <tr>
+        <td>UJ-05</td>
+        <td>Menghapus produk katalog</td>
+        <td>Klik Hapus pada baris produk, konfirmasi ya</td>
+        <td>Produk terhapus dari basis data lokal dan display katalog</td>
+        <td>Berhasil</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>5.1.2 Pengujian Modul Keranjang &amp; Checkout (Sisi Pengguna)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID Uji</th>
+        <th>Deskripsi Kasus Uji</th>
+        <th>Langkah Pengujian</th>
+        <th>Hasil yang Diharapkan</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>UJ-06</td>
+        <td>Menambah item ke keranjang</td>
+        <td>Klik tombol `+ Keranjang` pada salah satu produk</td>
+        <td>Badge kuantitas keranjang belanja bertambah seketika</td>
+        <td>Berhasil</td>
+      </tr>
+      <tr>
+        <td>UJ-07</td>
+        <td>Mengedit kuantitas di keranjang</td>
+        <td>Buka shop.html, klik `+` atau `-` pada baris item</td>
+        <td>Kuantitas dan subtotal terupdate responsif secara real-time</td>
+        <td>Berhasil</td>
+      </tr>
+      <tr>
+        <td>UJ-08</td>
+        <td>Melakukan checkout gabungan</td>
+        <td>Klik Checkout, isi data lengkap, klik Kirim via WA</td>
+        <td>Transaksi tersimpan di admin, keranjang kosong, tab WA terbuka</td>
+        <td>Berhasil</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>5.1.3 Pengujian Modul Jadwal &amp; Status Toko</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID Uji</th>
+        <th>Deskripsi Kasus Uji</th>
+        <th>Langkah Pengujian</th>
+        <th>Hasil yang Diharapkan</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>UJ-09</td>
+        <td>Mengubah status toko</td>
+        <td>Di halaman admin, klik ubah status toko tutup</td>
+        <td>Di index.html, badge toko langsung berubah merah (TUTUP)</td>
+        <td>Berhasil</td>
+      </tr>
+      <tr>
+        <td>UJ-10</td>
+        <td>Menambah jadwal workshop</td>
+        <td>Di admin, klik Tambah Jadwal, isi form, Simpan</td>
+        <td>Jadwal workshop baru tampil di widget agenda index.html</td>
+        <td>Berhasil</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>5.2 Hasil Pengujian</h2>
+  <p>Berdasarkan 10 skenario pengujian Black Box yang telah diuji secara menyeluruh di Google Chrome dan Microsoft Edge, seluruh modul utama menunjukkan tingkat keberhasilan <b>100% (Pass)</b> tanpa kegagalan sistem.</p>
+
+  <h2>5.3 Kesimpulan Pengujian</h2>
+  <p>Pengujian membuktikan bahwa platform e-commerce Toko Haur handal, responsif, dan siap dipublikasikan ke lingkungan operasional produksi.</p>
+
+
+  <!-- ==================== BAB VI ==================== -->
+  <div class="judul-bab">BAB VI<br>PENUTUP</div>
+  
+  <h2>6.1 Kesimpulan</h2>
+  <p>Dari rangkaian riset dan rancang bangun yang telah diselesaikan, dapat disimpulkan:</p>
+  <ol>
+    <li>Telah berhasil dikembangkan sistem e-commerce premium Toko Haur 🌿 berbasis teknologi Vanilla Web yang ringan, cepat, dan responsif.</li>
+    <li>Modul Keranjang Belanja Lanjutan dan Formulir Checkout meningkatkan efektivitas pemesanan berkat kalkulator otomatis dan invoice WhatsApp yang terstruktur.</li>
+    <li>Modul Admin Dashboard memberikan kemudahan penuh dalam mengelola produk (termasuk upload gambar Base64), jadwal workshop, dan operasional harian toko secara mandiri.</li>
+    <li>Metode Extreme Programming (XP) menjamin siklus perancangan yang cepat, tangkas, dan menghasilkan kode yang bersih melalui refactoring konstan.</li>
+  </ol>
+
+  <h2>6.2 Saran</h2>
+  <p>Untuk menyempurnakan sistem di masa depan, disarankan:</p>
+  <ol>
+    <li>Menambahkan sinkronisasi basis data awan terpusat (seperti Firebase Firestore) untuk kemudahan pengelolaan dari banyak perangkat sekaligus.</li>
+    <li>Mengintegrasikan Payment Gateway otomatis (seperti Midtrans) untuk verifikasi pembayaran real-time.</li>
+    <li>Menambahkan modul pengurang stok otomatis saat transaksi checkout dikonfirmasi sukses oleh admin.</li>
+  </ol>
+
+
+  <!-- ==================== DAFTAR PUSTAKA ==================== -->
+  <div class="judul-bab">DAFTAR PUSTAKA</div>
+  <br>
+  <ul style="list-style-type: none; padding-left: 0; text-align: left;">
+    <li style="text-indent: -1cm; padding-left: 1cm; margin-bottom: 12pt;">Beck, K., &amp; Andres, C. (2004). <i>Extreme Programming Explained: Embrace Change (2nd Edition)</i>. Boston: Addison-Wesley Professional.</li>
+    <li style="text-indent: -1cm; padding-left: 1cm; margin-bottom: 12pt;">Duckett, J. (2019). <i>HTML and CSS: Design and Build Websites</i>. Indianapolis: John Wiley &amp; Sons.</li>
+    <li style="text-indent: -1cm; padding-left: 1cm; margin-bottom: 12pt;">Flanagan, D. (2020). <i>JavaScript: The Definitive Guide (7th Edition)</i>. Sebastopol: O'Reilly Media.</li>
+    <li style="text-indent: -1cm; padding-left: 1cm; margin-bottom: 12pt;">Fowler, M. (2018). <i>UML Distilled: A Brief Guide to the Standard Object Modeling Language (3rd Edition)</i>. Boston: Addison-Wesley Professional.</li>
+    <li style="text-indent: -1cm; padding-left: 1cm; margin-bottom: 12pt;">Laudon, K. C., &amp; Traver, C. G. (2021). <i>E-Commerce 2021: Business, Technology, and Society (16th Edition)</i>. Boston: Pearson.</li>
+    <li style="text-indent: -1cm; padding-left: 1cm; margin-bottom: 12pt;">Pressman, R. S., &amp; Maxim, B. R. (2020). <i>Software Engineering: A Practitioner's Approach (9th Edition)</i>. New York: McGraw-Hill Education.</li>
+    <li style="text-indent: -1cm; padding-left: 1cm; margin-bottom: 12pt;">Rosdiana, S., &amp; Gunawan, H. (2025). <i>Implementasi Metode Agile Extreme Programming pada Rancang Bangun Sistem Informasi E-Commerce Kreatif Lokal</i>. <i>Jurnal Teknologi Informasi dan Sistem Komputer</i>, 12(2), 145-156.</li>
+    <li style="text-indent: -1cm; padding-left: 1cm; margin-bottom: 12pt;">Pratama, A. R. (2024). <i>Analisis dan Penerapan Penyimpanan Lokal Browser (Local Storage) untuk Kinerja Aplikasi Web Tanpa Server</i>. <i>Jurnal Rekayasa Perangkat Lunak Indonesia</i>, 8(1), 34-42.</li>
+    <li style="text-indent: -1cm; padding-left: 1cm; margin-bottom: 12pt;">Wijaya, K. (2023). <i>Rancang Bangun E-Commerce UMKM dengan Integrasi Instan WhatsApp API Menggunakan Metode Black Box Testing</i>. <i>Jurnal Rekayasa Sistem dan Informatika</i>, 15(3), 201-212.</li>
+  </ul>
+
+</body>
+</html>

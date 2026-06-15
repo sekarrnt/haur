@@ -74,6 +74,9 @@
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
+                  <a class="dropdown-item fw-bold text-info" href="user.html"><i class="fas fa-user me-2 text-info"></i>Dashboard User</a>
+                </li>
+                <li>
                   <a class="dropdown-item fw-bold text-success" href="admin.html"><i class="fas fa-user-shield me-2 text-success"></i>Admin Dashboard</a>
                 </li>
               </ul>
@@ -213,6 +216,23 @@
           checkoutModal = new bootstrap.Modal(document.getElementById("checkoutModal"));
         }
 
+        // Cek URL params untuk auto-open checkout setelah redirect login
+        const urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.get('action') === 'checkout') {
+          setTimeout(() => {
+            if(checkoutModal) {
+              const activeUser = JSON.parse(sessionStorage.getItem("haur_active_user"));
+              if (activeUser) {
+                const profile = activeUser.profile || {};
+                document.getElementById("customerName").value = profile.nama || activeUser.username || activeUser.email || "";
+                document.getElementById("customerPhone").value = profile.phone || "";
+                document.getElementById("customerAddress").value = profile.address || "";
+              }
+              checkoutModal.show();
+            }
+          }, 500);
+        }
+
         // Tampilkan keranjang belanja
         function renderCart() {
           const keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
@@ -345,8 +365,22 @@
 
         // Event Listener untuk Checkout Button
         checkoutBtn.addEventListener("click", () => {
-          if (checkoutModal) {
-            checkoutModal.show();
+          const activeUser = JSON.parse(sessionStorage.getItem("haur_active_user"));
+          if (activeUser) {
+             const profile = activeUser.profile || {};
+             document.getElementById("customerName").value = profile.nama || activeUser.username || activeUser.email || "";
+             document.getElementById("customerPhone").value = profile.phone || "";
+             document.getElementById("customerAddress").value = profile.address || "";
+             if (checkoutModal) checkoutModal.show();
+          } else {
+             if (confirm("Anda belum login.\n\nKlik OK untuk Login (disarankan).\nKlik Cancel untuk lanjut sebagai Guest.")) {
+               window.location.href = "user.html?redirect=checkout";
+             } else {
+               document.getElementById("customerName").value = "";
+               document.getElementById("customerPhone").value = "";
+               document.getElementById("customerAddress").value = "";
+               if (checkoutModal) checkoutModal.show();
+             }
           }
         });
 

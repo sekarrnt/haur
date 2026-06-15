@@ -118,6 +118,11 @@
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-white" id="orders-badge" style="display: none; font-size: 0.65rem; padding: 3px 6px;">0</span>
           </button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-reports" data-tab="reports">
+            <i class="fas fa-file-invoice-dollar me-1"></i> Laporan Keuangan
+          </button>
+        </li>
       </ul>
 
       <!-- Tab Content Area -->
@@ -322,6 +327,52 @@
                   </tr>
                 </thead>
                 <tbody id="admin-order-list">
+                  <!-- Dinamis -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+        <!-- E. TAB LAPORAN KEUANGAN -->
+        <div class="tab-pane fade" id="pane-reports" role="tabpanel">
+          <div class="glass-container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+              <h4 class="section-title-premium mb-0"><i class="fas fa-file-invoice-dollar text-success"></i> Laporan Keuangan</h4>
+              <button class="btn btn-success rounded-pill px-4" id="export-excel-btn">
+                <i class="fas fa-file-excel me-1"></i> Ekspor ke Excel
+              </button>
+            </div>
+            
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <div class="p-4 bg-success-subtle border border-success-subtle rounded-3">
+                  <h6 class="text-success fw-bold mb-1">Total Pemasukan (Pesanan Selesai)</h6>
+                  <h2 class="fw-extrabold text-success mb-0" id="report-total-revenue">Rp 0</h2>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-4 bg-light border border-light-subtle rounded-3">
+                  <h6 class="text-secondary fw-bold mb-1">Total Transaksi Selesai</h6>
+                  <h2 class="fw-extrabold text-secondary mb-0" id="report-total-trx">0 Transaksi</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead>
+                  <tr>
+                    <th>Invoice ID</th>
+                    <th>Tanggal</th>
+                    <th>Pelanggan</th>
+                    <th>Metode Pembayaran</th>
+                    <th>Total Pembayaran</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-report-list">
                   <!-- Dinamis -->
                 </tbody>
               </table>
@@ -559,6 +610,7 @@
           renderProductsTable();
           renderSchedulesTable();
           renderOrdersTable();
+          renderFinancialReport();
           updateBadgesAndStats();
         }
 
@@ -1012,11 +1064,87 @@
 
         function handleDeleteOrder(id) {
           if (confirm(`Apakah Anda yakin ingin menghapus arsip pesanan "${id}"?`)) {
-            deleteOrder(id);
-            alert("🗑️ Arsip pesanan berhasil dihapus.");
-            initDashboardData();
+             deleteOrder(id);
+             alert("🗑️ Arsip pesanan berhasil dihapus.");
+             initDashboardData();
           }
         }
+
+        // --- E. FINANCIAL REPORT LOGIC ---
+        function renderFinancialReport() {
+          const orders = getOrders();
+          const reportList = document.getElementById("admin-report-list");
+          reportList.innerHTML = "";
+          
+          let totalRevenue = 0;
+          let totalTrx = 0;
+
+          // Filter order yang sudah selesai
+          const finishedOrders = orders.filter(o => o.status === "Selesai");
+
+          if (finishedOrders.length === 0) {
+            reportList.innerHTML = `
+              <tr>
+                <td colspan="5" class="text-center py-4 text-muted small">Belum ada transaksi pesanan yang berstatus 'Selesai'.</td>
+              </tr>
+            `;
+          } else {
+            finishedOrders.forEach(o => {
+              const orderTotal = parseInt(o.total);
+              totalRevenue += orderTotal;
+              totalTrx++;
+
+              const tr = document.createElement("tr");
+              tr.innerHTML = `
+                <td class="fw-bold text-secondary">${o.id}</td>
+                <td class="small">${o.tanggal.split(" pukul ")[0]}</td>
+                <td>${o.namaPelanggan}</td>
+                <td>${o.metodePembayaran}</td>
+                <td class="fw-bold text-success">Rp ${orderTotal.toLocaleString("id-ID")}</td>
+              `;
+              reportList.appendChild(tr);
+            });
+          }
+
+          document.getElementById("report-total-revenue").innerText = `Rp ${totalRevenue.toLocaleString("id-ID")}`;
+          document.getElementById("report-total-trx").innerText = `${totalTrx} Transaksi`;
+        }
+
+        // Export to Excel (CSV)
+        document.getElementById("export-excel-btn").addEventListener("click", () => {
+          const orders = getOrders().filter(o => o.status === "Selesai");
+          if (orders.length === 0) {
+            alert("Tidak ada data transaksi selesai untuk diekspor.");
+            return;
+          }
+
+          let csvContent = "data:text/csv;charset=utf-8,";
+          // CSV Header
+          csvContent += "Invoice ID,Tanggal,Pelanggan,WhatsApp,Metode Pembayaran,Kurir,Total Pembayaran\n";
+
+          let totalRev = 0;
+          orders.forEach(o => {
+            const date = o.tanggal.split(" pukul ")[0];
+            const name = o.namaPelanggan.replace(/,/g, " "); // prevent csv comma issue
+            const address = o.alamat.replace(/,/g, " "); 
+            const payment = o.metodePembayaran;
+            const total = parseInt(o.total);
+            totalRev += total;
+
+            csvContent += `${o.id},${date},${name},${o.whatsapp},${payment},${o.kurir},${total}\n`;
+          });
+
+          // Add Total row
+          csvContent += `,,,,,,,\nTOTAL PENDAPATAN,,,,,,${totalRev}\n`;
+
+          const encodedUri = encodeURI(csvContent);
+          const link = document.createElement("a");
+          link.setAttribute("href", encodedUri);
+          link.setAttribute("download", `Laporan_Keuangan_Toko_Haur_${new Date().toISOString().split('T')[0]}.csv`);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
 
         // Render data forms on tab schedules load
         renderOperationalForm();

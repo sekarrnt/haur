@@ -155,6 +155,9 @@ function initDatabase() {
   if (!localStorage.getItem("haur_orders")) {
     localStorage.setItem("haur_orders", JSON.stringify([]));
   }
+  if (!localStorage.getItem("haur_users")) {
+    localStorage.setItem("haur_users", JSON.stringify([]));
+  }
 }
 
 // Jalankan inisialisasi langsung
@@ -310,4 +313,85 @@ function deleteOrder(id) {
   orders = orders.filter(o => o.id !== id);
   saveOrders(orders);
   return true;
+}
+
+// =========================================================================
+// SISTEM AUTENTIKASI (SIGN-UP & SIGN-IN) - SIAP UNTUK SUPABASE
+// =========================================================================
+
+// CONFIG SUPABASE (Ganti dengan URL dan ANON KEY dari Dashboard Supabase Anda)
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+
+// Cek apakah Supabase sudah diisi (jika tidak, sistem otomatis pakai LocalStorage sebagai Fallback agar web tetap berjalan sempurna)
+const isSupabaseConfigured = SUPABASE_URL !== "YOUR_SUPABASE_URL";
+
+// 1. Fungsi Registrasi (Sign-Up)
+async function registerUser(email, username, password) {
+  if (isSupabaseConfigured && typeof supabase !== 'undefined') {
+    // Logika Asli Supabase
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: { data: { username: username } }
+    });
+    if (error) return { success: false, message: error.message };
+    return { success: true, data: data };
+  } else {
+    // Logika Fallback (Web Fungsional LocalStorage)
+    let users = JSON.parse(localStorage.getItem("haur_users")) || [];
+    const exist = users.find(u => u.email === email);
+    if (exist) {
+      return { success: false, message: "Email ini sudah terdaftar. Silakan Sign-In." };
+    }
+    
+    const newUser = {
+      id: "usr-" + Date.now().toString(),
+      email: email,
+      username: username,
+      password: password, // Di production sungguhan ini otomatis terenkripsi oleh Supabase
+      profile: {
+        nama: username,
+        phone: "",
+        address: ""
+      }
+    };
+    
+    users.push(newUser);
+    localStorage.setItem("haur_users", JSON.stringify(users));
+    return { success: true, data: newUser };
+  }
+}
+
+// 2. Fungsi Login (Sign-In)
+async function loginUser(email, password) {
+  if (isSupabaseConfigured && typeof supabase !== 'undefined') {
+    // Logika Asli Supabase
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+    if (error) return { success: false, message: error.message };
+    return { success: true, data: data };
+  } else {
+    // Logika Fallback (Web Fungsional LocalStorage)
+    let users = JSON.parse(localStorage.getItem("haur_users")) || [];
+    const user = users.find(u => u.email === email && u.password === password);
+    
+    if (user) {
+      return { success: true, data: user };
+    } else {
+      return { success: false, message: "Email atau Password salah!" };
+    }
+  }
+}
+
+// 3. Fungsi Get User Terdaftar (Hanya untuk keperluan lokal saat ini)
+function updateLocalUserProfile(email, profileData) {
+  let users = JSON.parse(localStorage.getItem("haur_users")) || [];
+  const index = users.findIndex(u => u.email === email);
+  if (index !== -1) {
+    users[index].profile = profileData;
+    localStorage.setItem("haur_users", JSON.stringify(users));
+  }
 }
